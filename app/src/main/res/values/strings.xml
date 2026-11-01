@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ИИ-запуск</string>
+    <string name="widget_groups_name">ИИ-запуск: группы</string>
+    <string name="widget_rows_name">ИИ-запуск: строки</string>
+    <string name="widget_groups_desc">Ряды по каждому ИИ: приложение и аккаунты</string>
+    <string name="widget_rows_desc">Одна или две строки кнопок ваших ИИ и аккаунтов, листаются стрелками</string>
+    <string name="empty_hint">Откройте приложение «ИИ-запуск» и включите сервисы</string>
+    <string name="nav_prev_desc">Назад</string>
+    <string name="nav_next_desc">Дальше</string>
+    <string name="nav_shuffle_desc">Перемешать</string>
+</resources>

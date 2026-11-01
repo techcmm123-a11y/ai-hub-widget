@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="76dp"
+    android:viewportWidth="320"
+    android:viewportHeight="76">
+    <path android:fillColor="#15171B" android:pathData="M30,0 h260 a30,30 0 0 1 30,30 v16 a30,30 0 0 1 -30,30 h-260 a30,30 0 0 1 -30,-30 v-16 a30,30 0 0 1 30,-30 z" />
+    <path android:fillColor="#EE8F70" android:pathData="M34,14 h20 a14,14 0 0 1 14,14 v20 a14,14 0 0 1 -14,14 h-20 a14,14 0 0 1 -14,-14 v-20 a14,14 0 0 1 14,-14 z" />
+    <path android:fillColor="#46D1A8" android:pathData="M90,14 h20 a14,14 0 0 1 14,14 v20 a14,14 0 0 1 -14,14 h-20 a14,14 0 0 1 -14,-14 v-20 a14,14 0 0 1 14,-14 z" />
+    <path android:fillColor="#93B8FA" android:pathData="M146,14 h20 a14,14 0 0 1 14,14 v20 a14,14 0 0 1 -14,14 h-20 a14,14 0 0 1 -14,-14 v-20 a14,14 0 0 1 14,-14 z" />
+    <path android:fillColor="#45D0E0" android:pathData="M202,14 h20 a14,14 0 0 1 14,14 v20 a14,14 0 0 1 -14,14 h-20 a14,14 0 0 1 -14,-14 v-20 a14,14 0 0 1 14,-14 z" />
+    <path android:fillColor="#E8E8ED" android:pathData="M258,14 h20 a14,14 0 0 1 14,14 v20 a14,14 0 0 1 -14,14 h-20 a14,14 0 0 1 -14,-14 v-20 a14,14 0 0 1 14,-14 z" />
+</vector>

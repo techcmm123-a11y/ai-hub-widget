@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="c_card">#15171B</color>
+    <color name="c_row">#1F2228</color>
+    <color name="c_chip">#2B2F37</color>
+    <color name="c_edge">#14FFFFFF</color>
+    <color name="c_text">#F2F4F8</color>
+    <color name="c_sub">#9AA3B2</color>
+</resources>

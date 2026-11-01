@@ -1,0 +1,271 @@
+package com.example.aihub
+
+import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.View
+import android.widget.RemoteViews
+import java.util.Random
+
+object Widgets {
+
+    const val ACTION_PREV = "com.example.aihub.PREV"
+    const val ACTION_NEXT = "com.example.aihub.NEXT"
+    const val ACTION_SHUFFLE = "com.example.aihub.SHUFFLE"
+    const val MAX_SLOTS = 6
+
+    fun updateAll(context: Context) {
+        val m = AppWidgetManager.getInstance(context)
+        val g = m.getAppWidgetIds(ComponentName(context, GroupsWidget::class.java))
+        if (g.isNotEmpty()) {
+            val v = groupsViews(context)
+            for (id in g) m.updateAppWidget(id, v)
+        }
+        val r = m.getAppWidgetIds(ComponentName(context, RowsWidget::class.java))
+        if (r.isNotEmpty()) {
+            val cfg = ConfigStore.load(context)
+            for (id in r) m.updateAppWidget(id, rowsViews(context, id, rowsCount(cfg, m, id)))
+        }
+    }
+
+    private fun pending(context: Context, code: Int, intent: Intent): PendingIntent {
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        return PendingIntent.getActivity(
+            context, code, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+    }
+
+    private fun settingsIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
+
+    // ------------------------------------------------------------------
+    // Виджет «Группы»: до 4 ИИ, у каждого до 3 входов.
+    // ------------------------------------------------------------------
+    fun groupsViews(context: Context): RemoteViews {
+        val cfg = ConfigStore.load(context)
+        val views = RemoteViews(context.packageName, R.layout.widget_groups)
+        val shown = cfg.services.filter { it.enabled && cfg.entriesFor(it.id).isNotEmpty() }.take(4)
+
+        views.setViewVisibility(R.id.empty_groups, if (shown.isEmpty()) View.VISIBLE else View.GONE)
+        if (shown.isEmpty()) {
+            views.setOnClickPendingIntent(R.id.empty_groups, pending(context, 90, settingsIntent(context)))
+        }
+
+        for (r in 0 until 4) {
+            if (r >= shown.size) {
+                views.setViewVisibility(Ids.row[r], View.GONE)
+                continue
+            }
+            val svc = shown[r]
+            val entries = cfg.entriesFor(svc.id).take(3)
+            views.setViewVisibility(Ids.row[r], View.VISIBLE)
+            views.setImageViewBitmap(Ids.tile[r], Tiles.render(context, svc, cfg, 126))
+            views.setTextViewText(Ids.name[r], svc.title)
+            views.setOnClickPendingIntent(
+                Ids.tile[r],
+                pending(context, 100 + r * 10 + 9, Open.intentFor(context, svc, entries[0]))
+            )
+
+            for (c in 0 until 3) {
+                val chip = Ids.chip[r][c]
+                if (c >= entries.size) {
+                    views.setViewVisibility(chip, View.GONE)
+                    continue
+                }
+                val e = entries[c]
+                views.setViewVisibility(chip, View.VISIBLE)
+                if (e.mode == "app") {
+                    views.setViewVisibility(Ids.chipApp[r][c], View.VISIBLE)
+                    views.setViewVisibility(Ids.chipWeb[r][c], View.GONE)
+                    views.setViewVisibility(Ids.chipText[r][c], View.GONE)
+                } else {
+                    views.setViewVisibility(Ids.chipApp[r][c], View.GONE)
+                    views.setViewVisibility(Ids.chipWeb[r][c], View.VISIBLE)
+                    views.setInt(Ids.chipWeb[r][c], "setColorFilter", e.color)
+                    views.setViewVisibility(Ids.chipText[r][c], View.VISIBLE)
+                    views.setTextViewText(Ids.chipText[r][c], e.label)
+                }
+                views.setContentDescription(chip, svc.title + ": " + e.label)
+                views.setOnClickPendingIntent(
+                    chip,
+                    pending(context, 100 + r * 10 + c, Open.intentFor(context, svc, e))
+                )
+            }
+        }
+        return views
+    }
+
+    // ------------------------------------------------------------------
+    // Виджет «Строки»: 1 или 2 строки кнопок, страницы, режим «аквариум».
+    // ------------------------------------------------------------------
+    private class Item(val svc: ServiceCfg, val entry: EntryCfg, val multi: Boolean)
+
+    private fun items(cfg: Config): List<Item> {
+        val list = ArrayList<Item>()
+        for (svc in cfg.services) {
+            if (!svc.enabled) continue
+            val es = cfg.entriesFor(svc.id)
+            for (e in es) {
+                if (e.inRows) list.add(Item(svc, e, es.size > 1))
+            }
+        }
+        return list
+    }
+
+    private fun state(context: Context) =
+        context.getSharedPreferences("rows_state", Context.MODE_PRIVATE)
+
+    private fun pageOf(context: Context, id: Int): Int = state(context).getInt("page_" + id, 0)
+
+    private fun seedOf(context: Context): Int = state(context).getInt("seed", 1)
+
+    /** Сколько строк показывать: по настройке либо по высоте виджета (две, если он вытянут). */
+    fun rowsCount(cfg: Config, manager: AppWidgetManager, id: Int): Int {
+        if (cfg.rowsMode == 1) return 1
+        if (cfg.rowsMode == 2) return 2
+        val h = manager.getAppWidgetOptions(id).getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 0)
+        return if (h >= 110) 2 else 1
+    }
+
+    private fun pageCount(total: Int, perPage: Int): Int =
+        if (total == 0) 1 else (total + perPage - 1) / perPage
+
+    fun turnPage(context: Context, id: Int, delta: Int) {
+        val m = AppWidgetManager.getInstance(context)
+        val cfg = ConfigStore.load(context)
+        val rows = rowsCount(cfg, m, id)
+        val pages = pageCount(items(cfg).size, rows * cfg.perRow)
+        val next = ((pageOf(context, id) + delta) % pages + pages) % pages
+        state(context).edit().putInt("page_" + id, next).apply()
+        m.updateAppWidget(id, rowsViews(context, id, rows))
+    }
+
+    fun shuffle(context: Context) {
+        state(context).edit().putInt("seed", Random().nextInt(1000000)).apply()
+        updateAll(context)
+    }
+
+    private fun navIntent(context: Context, id: Int, action: String, k: Int): PendingIntent {
+        val intent = Intent(context, RowsWidget::class.java)
+        intent.action = action
+        intent.data = Uri.parse("aihub://rows/" + id + "/" + action)
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id)
+        return PendingIntent.getBroadcast(
+            context, 1000 + id * 4 + k, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+    }
+
+    fun rowsViews(context: Context, id: Int, rows: Int): RemoteViews {
+        val cfg = ConfigStore.load(context)
+        val aq = cfg.aquarium
+        val views = RemoteViews(
+            context.packageName,
+            if (aq) R.layout.widget_aquarium else R.layout.widget_rows
+        )
+        val all = items(cfg)
+        val perRow = cfg.perRow
+        val perPage = rows * perRow
+        val pages = pageCount(all.size, perPage)
+        val page = pageOf(context, id).coerceIn(0, pages - 1)
+        val shown = all.drop(page * perPage).take(perPage)
+        val seed = seedOf(context)
+        val density = context.resources.displayMetrics.density
+        val empty = all.isEmpty()
+
+        views.setViewVisibility(R.id.empty_rows, if (empty) View.VISIBLE else View.GONE)
+        if (empty) {
+            views.setOnClickPendingIntent(R.id.empty_rows, pending(context, 92, settingsIntent(context)))
+        }
+        views.setViewVisibility(Ids.rowBox[0], if (empty) View.GONE else View.VISIBLE)
+        views.setViewVisibility(Ids.rowBox[1], if (empty || rows < 2) View.GONE else View.VISIBLE)
+
+        val paged = pages > 1
+        views.setViewVisibility(R.id.nav_prev, if (paged) View.VISIBLE else View.GONE)
+        views.setViewVisibility(R.id.nav_next, if (paged) View.VISIBLE else View.GONE)
+        if (paged) {
+            views.setOnClickPendingIntent(R.id.nav_prev, navIntent(context, id, ACTION_PREV, 0))
+            views.setOnClickPendingIntent(R.id.nav_next, navIntent(context, id, ACTION_NEXT, 1))
+        }
+        if (aq) {
+            views.setViewVisibility(R.id.nav_shuffle, if (empty) View.GONE else View.VISIBLE)
+            views.setOnClickPendingIntent(R.id.nav_shuffle, navIntent(context, id, ACTION_SHUFFLE, 2))
+        }
+
+        for (r in 0 until 2) {
+            for (s in 0 until MAX_SLOTS) {
+                val slotId = if (aq) Ids.fl[r][s] else Ids.rt[r][s]
+                val idx = r * perRow + s
+                if (empty || r >= rows || s >= perRow || idx >= shown.size) {
+                    views.setViewVisibility(slotId, View.GONE)
+                    continue
+                }
+                val item = shown[idx]
+                val badge = if (item.multi) item.entry.label.take(1).uppercase() else ""
+                val bmp = Tiles.render(context, item.svc, cfg, 140, badge, item.entry.color)
+                views.setViewVisibility(slotId, View.VISIBLE)
+                if (aq) {
+                    views.setImageViewBitmap(Ids.fa[r][s], bmp)
+                    views.setImageViewBitmap(Ids.fb[r][s], bmp)
+                    val rnd = Random((seed + r * 31 + s * 7 + page * 13).toLong())
+                    val top = (rnd.nextInt(9) * density).toInt()
+                    val bottom = (8 * density).toInt() - top
+                    views.setViewPadding(slotId, 0, top, 0, bottom)
+                } else {
+                    views.setImageViewBitmap(slotId, bmp)
+                }
+                views.setContentDescription(slotId, item.svc.title + ": " + item.entry.label)
+                views.setOnClickPendingIntent(
+                    slotId,
+                    pending(context, 300 + r * 10 + s, Open.intentFor(context, item.svc, item.entry))
+                )
+            }
+        }
+        return views
+    }
+}
+
+class GroupsWidget : AppWidgetProvider() {
+    override fun onUpdate(context: Context, manager: AppWidgetManager, ids: IntArray) {
+        val v = Widgets.groupsViews(context)
+        for (id in ids) manager.updateAppWidget(id, v)
+    }
+}
+
+class RowsWidget : AppWidgetProvider() {
+
+    override fun onUpdate(context: Context, manager: AppWidgetManager, ids: IntArray) {
+        val cfg = ConfigStore.load(context)
+        for (id in ids) {
+            manager.updateAppWidget(id, Widgets.rowsViews(context, id, Widgets.rowsCount(cfg, manager, id)))
+        }
+    }
+
+    override fun onAppWidgetOptionsChanged(
+        context: Context,
+        manager: AppWidgetManager,
+        appWidgetId: Int,
+        newOptions: Bundle
+    ) {
+        val cfg = ConfigStore.load(context)
+        manager.updateAppWidget(
+            appWidgetId,
+            Widgets.rowsViews(context, appWidgetId, Widgets.rowsCount(cfg, manager, appWidgetId))
+        )
+    }
+
+    override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
+        val id = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
+        when (intent.action) {
+            Widgets.ACTION_PREV -> if (id != AppWidgetManager.INVALID_APPWIDGET_ID) Widgets.turnPage(context, id, -1)
+            Widgets.ACTION_NEXT -> if (id != AppWidgetManager.INVALID_APPWIDGET_ID) Widgets.turnPage(context, id, 1)
+            Widgets.ACTION_SHUFFLE -> Widgets.shuffle(context)
+        }
+    }
+}

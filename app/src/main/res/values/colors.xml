@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="c_card">#FBFAF7</color>
+    <color name="c_row">#F0ECE3</color>
+    <color name="c_chip">#FFFFFF</color>
+    <color name="c_edge">#14000000</color>
+    <color name="c_text">#16181D</color>
+    <color name="c_sub">#566070</color>
+    <color name="icon_bg">#1C1C1E</color>
+    <color name="app_bg">#121212</color>
+</resources>
