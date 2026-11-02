@@ -2,6 +2,7 @@ package com.example.aihub
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.text.InputType
 import android.view.Gravity
@@ -39,6 +40,10 @@ class EntryActivity : Activity() {
     private val match = LinearLayout.LayoutParams.MATCH_PARENT
     private val wrap = LinearLayout.LayoutParams.WRAP_CONTENT
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(L.wrap(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cfg = ConfigStore.load(this)
@@ -74,6 +79,9 @@ class EntryActivity : Activity() {
         return t
     }
 
+    private fun defaultLabel(): String =
+        getString(if (mode == "app") R.string.label_app else R.string.label_site)
+
     private fun buildUi(): View {
         val scroll = ScrollView(this)
         val root = LinearLayout(this)
@@ -82,26 +90,28 @@ class EntryActivity : Activity() {
         root.setPadding(p, p, p, p)
         scroll.addView(root)
 
-        root.addView(Ui.label(this, if (entry == null) "Новый вход" else "Изменить вход", 24f, Ui.TEXT, true))
+        root.addView(
+            Ui.label(this, getString(if (entry == null) R.string.entry_new else R.string.entry_edit), 24f, Ui.TEXT, true)
+        )
         root.addView(Ui.label(this, svc.title, 14f, Ui.SUB), lp(match, wrap, 2))
 
-        root.addView(Ui.label(this, "Название на кнопке", 12f, Ui.SUB), lp(match, wrap, 16))
+        root.addView(Ui.label(this, getString(R.string.entry_name), 12f, Ui.SUB), lp(match, wrap, 16))
         labelField = EditText(this)
-        labelField.hint = "Например: Личный, Работа"
+        labelField.hint = getString(R.string.entry_name_hint)
         labelField.setText(entry?.label ?: "")
         labelField.inputType = InputType.TYPE_CLASS_TEXT
         root.addView(labelField, lp(match, wrap))
 
-        root.addView(Ui.label(this, "Как открыть", 12f, Ui.SUB), lp(match, wrap, 12))
+        root.addView(Ui.label(this, getString(R.string.how_open), 12f, Ui.SUB), lp(match, wrap, 12))
         val modes = LinearLayout(this)
         modes.orientation = LinearLayout.HORIZONTAL
         val h = Ui.dp(this, 44)
-        modeApp = button("Приложение", Ui.ROW, Ui.TEXT)
+        modeApp = button(getString(R.string.mode_app), Ui.ROW, Ui.TEXT)
         modeApp.setOnClickListener {
             mode = "app"
             applyMode()
         }
-        modeWeb = button("Сайт в браузере", Ui.ROW, Ui.TEXT)
+        modeWeb = button(getString(R.string.mode_web), Ui.ROW, Ui.TEXT)
         modeWeb.setOnClickListener {
             mode = "web"
             applyMode()
@@ -117,7 +127,7 @@ class EntryActivity : Activity() {
         appBox.orientation = LinearLayout.VERTICAL
         appInfo = Ui.label(this, "", 14f, Ui.TEXT)
         appBox.addView(appInfo, lp(match, wrap, 12))
-        val pick = Ui.label(this, "Выбрать другое приложение", 14f, Ui.ACCENT, true)
+        val pick = Ui.label(this, getString(R.string.pick_app), 14f, Ui.ACCENT, true)
         pick.setPadding(0, Ui.dp(this, 10), 0, Ui.dp(this, 10))
         pick.setOnClickListener { pickApp() }
         appBox.addView(pick)
@@ -126,17 +136,17 @@ class EntryActivity : Activity() {
         // Блок «Сайт»
         webBox = LinearLayout(this)
         webBox.orientation = LinearLayout.VERTICAL
-        webBox.addView(Ui.label(this, "Браузер (в каждом браузере свой вход в аккаунт)", 12f, Ui.SUB), lp(match, wrap, 12))
+        webBox.addView(Ui.label(this, getString(R.string.browser_label), 12f, Ui.SUB), lp(match, wrap, 12))
         browserSpinner = Spinner(this)
         val names = ArrayList<String>()
-        names.add("Браузер по умолчанию")
+        names.add(getString(R.string.browser_default))
         for (b in browsers) names.add(b.label)
         browserSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, names)
         val saved = entry?.browserPkg ?: ""
         val idx = browsers.indexOfFirst { it.pkg == saved }
         browserSpinner.setSelection(if (idx >= 0) idx + 1 else 0)
         webBox.addView(browserSpinner, lp(match, wrap))
-        webBox.addView(Ui.label(this, "Ссылка (необязательно)", 12f, Ui.SUB), lp(match, wrap, 12))
+        webBox.addView(Ui.label(this, getString(R.string.link_optional), 12f, Ui.SUB), lp(match, wrap, 12))
         urlField = EditText(this)
         urlField.hint = svc.url
         urlField.setText(entry?.url ?: "")
@@ -145,7 +155,7 @@ class EntryActivity : Activity() {
         root.addView(webBox)
 
         // Цвет метки
-        root.addView(Ui.label(this, "Цвет метки", 12f, Ui.SUB), lp(match, wrap, 16))
+        root.addView(Ui.label(this, getString(R.string.color_label), 12f, Ui.SUB), lp(match, wrap, 16))
         val colors = LinearLayout(this)
         colors.orientation = LinearLayout.HORIZONTAL
         for (i in Config.PALETTE.indices) {
@@ -163,7 +173,7 @@ class EntryActivity : Activity() {
         root.addView(colors, lp(match, wrap, 8))
 
         inRowsSwitch = Switch(this)
-        inRowsSwitch.text = "Показывать в виджете «Строки»"
+        inRowsSwitch.text = getString(R.string.show_in_widgets)
         inRowsSwitch.setTextColor(Ui.TEXT)
         inRowsSwitch.isChecked = entry?.inRows ?: true
         root.addView(inRowsSwitch, lp(match, wrap, 16))
@@ -171,9 +181,9 @@ class EntryActivity : Activity() {
         // Кнопки
         val actions = LinearLayout(this)
         actions.orientation = LinearLayout.HORIZONTAL
-        val test = button("Проверить", Ui.ROW, Ui.TEXT)
+        val test = button(getString(R.string.test), Ui.ROW, Ui.TEXT)
         test.setOnClickListener { testOpen() }
-        val save = button("Сохранить", Ui.OK, Ui.DARK)
+        val save = button(getString(R.string.save), Ui.OK, Ui.DARK)
         save.setOnClickListener { save() }
         val bh = Ui.dp(this, 48)
         actions.addView(test, LinearLayout.LayoutParams(0, bh, 1f))
@@ -183,13 +193,13 @@ class EntryActivity : Activity() {
         root.addView(actions, lp(match, wrap, 24))
 
         if (entry != null) {
-            val del = Ui.label(this, "Удалить вход", 14f, Ui.RED, true)
+            val del = Ui.label(this, getString(R.string.delete_entry), 14f, Ui.RED, true)
             del.gravity = Gravity.CENTER
             del.setPadding(0, Ui.dp(this, 14), 0, Ui.dp(this, 6))
             del.setOnClickListener { deleteEntry() }
             root.addView(del)
         }
-        val cancel = Ui.label(this, "Отмена", 14f, Ui.SUB)
+        val cancel = Ui.label(this, getString(R.string.cancel), 14f, Ui.SUB)
         cancel.gravity = Gravity.CENTER
         cancel.setPadding(0, Ui.dp(this, 10), 0, Ui.dp(this, 10))
         cancel.setOnClickListener { finish() }
@@ -209,11 +219,7 @@ class EntryActivity : Activity() {
 
     private fun refreshAppInfo() {
         val name = Apps.label(this, Apps.packageFor(this, svc))
-        appInfo.text = if (name != null) {
-            "Найдено: " + name
-        } else {
-            "Приложение не найдено. Выберите его вручную или используйте сайт."
-        }
+        appInfo.text = if (name != null) getString(R.string.app_found, name) else getString(R.string.app_missing)
     }
 
     private fun refreshSwatches() {
@@ -229,7 +235,7 @@ class EntryActivity : Activity() {
         val apps = Apps.launchable(this)
         val names = apps.map { it.label }.toTypedArray()
         AlertDialog.Builder(this)
-            .setTitle("Приложение для " + svc.title)
+            .setTitle(getString(R.string.pick_app_title, svc.title))
             .setItems(names) { _, which ->
                 svc.pkg = apps[which].pkg
                 refreshAppInfo()
@@ -243,8 +249,7 @@ class EntryActivity : Activity() {
     }
 
     private fun collect(): EntryCfg {
-        val typed = labelField.text.toString().trim()
-        val label = if (typed.isEmpty()) (if (mode == "app") "Приложение" else "Сайт") else typed
+        val label = labelField.text.toString().trim()
         val pos = browserSpinner.selectedItemPosition
         val browser = if (mode == "web" && pos > 0) browsers[pos - 1].pkg else ""
         val url = if (mode == "web") normalizeUrl(urlField.text.toString().trim()) else ""
@@ -255,7 +260,7 @@ class EntryActivity : Activity() {
         try {
             startActivity(Open.intentFor(this, svc, collect()))
         } catch (e: Exception) {
-            Toast.makeText(this, "Не удалось открыть", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.open_failed, Toast.LENGTH_SHORT).show()
         }
     }
 

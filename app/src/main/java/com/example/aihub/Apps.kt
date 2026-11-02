@@ -40,7 +40,8 @@ object Apps {
                 if (isInstalled(context, p)) return p
             }
         }
-        val found = launchable(context).firstOrNull { it.label.contains(svc.title, ignoreCase = true) }
+        val re = Regex("(^|[^\\p{L}\\p{N}])" + Regex.escape(svc.title) + "([^\\p{L}\\p{N}]|$)", RegexOption.IGNORE_CASE)
+        val found = launchable(context).firstOrNull { re.containsMatchIn(it.label) }
         return found?.pkg
     }
 

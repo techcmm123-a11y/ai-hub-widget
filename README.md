@@ -1,26 +1,28 @@
-# ИИ-запуск 1.1
+# AI Start 1.2
 
-Виджеты для быстрого доступа к ИИ с главного экрана Android.
+Quick access to your AI apps and accounts from the Android home screen.
+Быстрый доступ к ИИ-приложениям и аккаунтам с главного экрана Android.
 
-- **Строки** (по умолчанию 4×1, растягивается до 2 строк): кнопки ваших ИИ и аккаунтов нормального размера, 4–6 в строке. Если кнопок больше, чем помещается, по бокам стрелки страниц.
-- **Режим «аквариум»**: кнопки покачиваются, у каждой свой ритм, расположение случайное, кнопка со стрелками перемешивает его.
-- **Группы**: строка на каждый ИИ (до 4), справа кнопки входов (до 3).
-- Форма значков: закруглённые или круглые. Значки из установленных приложений, иначе буквы.
-- Вход можно скрыть из «Строк», порядок меняется стрелками.
-- Резервная копия настроек текстом, кнопка добавления виджета, экран диагностики.
+- **Language / Язык**: automatic (Russian if the phone is Russian, otherwise English), or choose in settings.
+- **Menu by sections**: Choose AI, My AIs, Appearance, Widgets, Language, Backup, About and support.
+- **Choose AI**: catalog by category (text, images, video, music and voice, code, research and work); expand a category and tick what you need.
+- **My AIs**: several entries per AI (app, website in a chosen browser, other accounts), reorder, hide from widgets.
+- **If the app is not installed**, a tap offers Google Play or the official website.
+- **Widgets**: Rows (1-2 rows, 4-6 buttons), Columns (vertical, 1-2 columns), Groups (a row per AI).
+- **Aquarium mode**: buttons sway in the water, each in its own style and rhythm; shuffle button; paging with arrows.
+- Icon shape: rounded or round. Icons come from installed apps, otherwise letter tiles.
+- Backup of settings as text, quick add of widgets, diagnostics, donate button (set the link in `Links.kt`).
 
-Приложение не имеет разрешений, не использует сеть и ничего не собирает.
-Каждый браузер хранит свой вход, поэтому разные браузеры дают разные аккаунты.
+No permissions, no internet access, nothing collected.
 
-Ограничение Android: внутри виджета нельзя читать датчики наклона и листать пальцем вбок,
-поэтому аквариум имитируется автоматической сменой кадров, а страницы листаются стрелками.
+Android limit: a widget cannot read motion sensors or scroll sideways by swipe, so aquarium motion is an imitation
+(automatic frame changes) and pages are turned with arrows.
 
-## Подпись сборок
-В проект включён стандартный отладочный ключ `app/debug.keystore` (пароль `android`),
-чтобы новые сборки обновляли приложение поверх старой без потери настроек.
-Это публичный отладочный ключ, он подходит только для личной установки.
+## Signing
+The project includes the standard public debug key `app/debug.keystore` (password `android`) so new builds update
+the installed app in place. Use it for personal installs only.
 
-## Как получить APK
-1. Загрузите файлы проекта в репозиторий GitHub (ветка main), включая `.github/workflows/build.yml`.
-2. Actions → Build APK → дождитесь зелёной галочки.
-3. В Artifacts скачайте `ai-hub-apk`, распакуйте и установите `app-debug.apk`.
+## Build
+1. Upload the project files to a GitHub repository (branch main), including `.github/workflows/build.yml`.
+2. Actions, Build APK, wait for the green check.
+3. Download `ai-hub-apk` from Artifacts, unzip and install `app-debug.apk`.

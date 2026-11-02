@@ -43,9 +43,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2100"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="2600"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
 
                 <ImageView
                     android:id="@+id/fa_0_0"
@@ -69,9 +69,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2700"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="3300"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
 
                 <ImageView
                     android:id="@+id/fa_0_1"
@@ -95,9 +95,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2300"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="2900"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
 
                 <ImageView
                     android:id="@+id/fa_0_2"
@@ -121,9 +121,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="3000"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="3700"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
 
                 <ImageView
                     android:id="@+id/fa_0_3"
@@ -147,9 +147,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2500"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="3100"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
 
                 <ImageView
                     android:id="@+id/fa_0_4"
@@ -173,9 +173,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2900"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="3500"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
 
                 <ImageView
                     android:id="@+id/fa_0_5"
@@ -208,9 +208,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2600"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="3200"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
 
                 <ImageView
                     android:id="@+id/fa_1_0"
@@ -234,9 +234,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2200"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="2700"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
 
                 <ImageView
                     android:id="@+id/fa_1_1"
@@ -260,9 +260,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2900"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="3600"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
 
                 <ImageView
                     android:id="@+id/fa_1_2"
@@ -286,9 +286,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2400"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="3000"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
 
                 <ImageView
                     android:id="@+id/fa_1_3"
@@ -312,9 +312,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2000"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="2600"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
 
                 <ImageView
                     android:id="@+id/fa_1_4"
@@ -338,9 +338,9 @@
                 android:autoStart="true"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:flipInterval="2800"
-                android:inAnimation="@anim/fish_in"
-                android:outAnimation="@anim/fish_out">
+                android:flipInterval="3400"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
 
                 <ImageView
                     android:id="@+id/fa_1_5"

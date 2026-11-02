@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_cols"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/thin_bg"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+    <LinearLayout
+        android:id="@+id/vcols"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipChildren="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/vcol_0"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clipChildren="false"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ViewFlipper
+                android:id="@+id/vfl_0_0"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="2600"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
+
+                <ImageView
+                    android:id="@+id/vfa_0_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_0_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_0_1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3300"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
+
+                <ImageView
+                    android:id="@+id/vfa_0_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_0_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_0_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="2900"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
+
+                <ImageView
+                    android:id="@+id/vfa_0_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_0_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_0_3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3700"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
+
+                <ImageView
+                    android:id="@+id/vfa_0_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_0_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_0_4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3100"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
+
+                <ImageView
+                    android:id="@+id/vfa_0_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_0_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_0_5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3500"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
+
+                <ImageView
+                    android:id="@+id/vfa_0_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_0_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/vcol_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clipChildren="false"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ViewFlipper
+                android:id="@+id/vfl_1_0"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3200"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
+
+                <ImageView
+                    android:id="@+id/vfa_1_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_1_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_1_1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="2700"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
+
+                <ImageView
+                    android:id="@+id/vfa_1_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_1_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_1_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3600"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
+
+                <ImageView
+                    android:id="@+id/vfa_1_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_1_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_1_3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3000"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
+
+                <ImageView
+                    android:id="@+id/vfa_1_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_1_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_1_4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="2600"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
+
+                <ImageView
+                    android:id="@+id/vfa_1_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_1_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/vfl_1_5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3400"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
+
+                <ImageView
+                    android:id="@+id/vfa_1_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/vfb_1_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/vnav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/vnav_prev"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_prev_desc"
+            android:padding="5dp"
+            android:src="@drawable/ic_chevron_left"
+            android:tint="@color/c_sub"
+            android:visibility="gone" />
+        <ImageView
+            android:id="@+id/vnav_shuffle"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_shuffle_desc"
+            android:padding="5dp"
+            android:src="@drawable/ic_shuffle"
+            android:tint="@color/c_sub"
+            android:visibility="gone" />
+        <ImageView
+            android:id="@+id/vnav_next"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/nav_next_desc"
+            android:padding="5dp"
+            android:src="@drawable/ic_chevron_right"
+            android:tint="@color/c_sub"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/vempty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/empty_hint"
+        android:textColor="@color/c_sub"
+        android:textSize="12sp"
+        android:visibility="gone" />
+</LinearLayout>

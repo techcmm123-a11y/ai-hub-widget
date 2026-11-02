@@ -33,6 +33,12 @@
             android:name=".EntryActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ChooserActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/ChooserTheme" />
+
         <receiver
             android:name=".GroupsWidget"
             android:exported="true"
@@ -55,6 +61,18 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/rows_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".ColumnsWidget"
+            android:exported="true"
+            android:label="@string/widget_cols_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/columns_widget_info" />
         </receiver>
     </application>
 </manifest>

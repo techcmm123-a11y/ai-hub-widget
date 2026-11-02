@@ -37,7 +37,9 @@ class Config(
     val services: MutableList<ServiceCfg>,
     val entries: MutableList<EntryCfg>,
     var perRow: Int = 5,
-    var rowsMode: Int = 0
+    var rowsMode: Int = 0,
+    var perCol: Int = 5,
+    var colsMode: Int = 0
 ) {
     fun entriesFor(serviceId: String): List<EntryCfg> = entries.filter { it.serviceId == serviceId }
 
@@ -50,6 +52,8 @@ class Config(
         o.put("aquarium", aquarium)
         o.put("perRow", perRow)
         o.put("rowsMode", rowsMode)
+        o.put("perCol", perCol)
+        o.put("colsMode", colsMode)
         val sa = JSONArray()
         for (s in services) {
             val x = JSONObject()
@@ -97,21 +101,31 @@ class Config(
 
         fun newId(): String = UUID.randomUUID().toString().substring(0, 8)
 
+        /** Создаёт вход по умолчанию, если у сервиса их ещё нет. */
+        fun ensureEntry(context: Context, cfg: Config, svc: ServiceCfg) {
+            if (cfg.entriesFor(svc.id).isNotEmpty()) return
+            val def = Catalog.byId(svc.id)
+            val hasApp = Apps.packageFor(context, svc) != null
+            val preferApp = hasApp || (def != null && def.pkgs.isNotEmpty())
+            cfg.entries.add(
+                EntryCfg(
+                    newId(), svc.id, "", if (preferApp) "app" else "web", "", "",
+                    if (preferApp) COLOR_APP else COLOR_BLUE
+                )
+            )
+        }
+
         fun defaults(context: Context): Config {
             val services = mutableListOf<ServiceCfg>()
-            val entries = mutableListOf<EntryCfg>()
+            val cfg = Config("rounded", true, false, services, mutableListOf())
             for (d in Catalog.list) {
                 val svc = ServiceCfg(d.id, d.title, d.mono, d.bg, d.fg, d.url, false, false, "")
-                val installed = Apps.packageFor(context, svc) != null
-                svc.enabled = installed || d.id == "claude" || d.id == "chatgpt" || d.id == "gemini"
+                val knownInstalled = d.pkgs.any { Apps.isInstalled(context, it) }
+                svc.enabled = knownInstalled || d.id == "claude" || d.id == "chatgpt" || d.id == "gemini"
                 services.add(svc)
-                if (installed) {
-                    entries.add(EntryCfg(newId(), d.id, "Приложение", "app", "", "", COLOR_APP))
-                } else {
-                    entries.add(EntryCfg(newId(), d.id, "Сайт", "web", "", "", COLOR_BLUE))
-                }
+                if (svc.enabled) ensureEntry(context, cfg, svc)
             }
-            return Config("rounded", true, false, services, entries)
+            return cfg
         }
 
         fun fromJson(o: JSONObject): Config {
@@ -136,9 +150,12 @@ class Config(
             val ea = o.optJSONArray("entries") ?: JSONArray()
             for (i in 0 until ea.length()) {
                 val x = ea.getJSONObject(i)
+                var label = x.optString("label")
+                // Старые версии сохраняли подпись по умолчанию как текст: переводим в «пусто».
+                if (label == "Приложение" || label == "Сайт" || label == "App" || label == "Site") label = ""
                 entries.add(
                     EntryCfg(
-                        x.getString("id"), x.getString("service"), x.optString("label"),
+                        x.getString("id"), x.getString("service"), label,
                         x.optString("mode", "web"), x.optString("browser"), x.optString("url"),
                         x.optInt("color", COLOR_BLUE), x.optBoolean("inRows", true)
                     )
@@ -147,9 +164,18 @@ class Config(
             return Config(
                 o.optString("shape", "rounded"), o.optBoolean("realIcons", true),
                 o.optBoolean("aquarium", false), services, entries,
-                o.optInt("perRow", 5).coerceIn(4, 6), o.optInt("rowsMode", 0).coerceIn(0, 2)
+                o.optInt("perRow", 5).coerceIn(4, 6), o.optInt("rowsMode", 0).coerceIn(0, 2),
+                o.optInt("perCol", 5).coerceIn(3, 6), o.optInt("colsMode", 0).coerceIn(0, 2)
             )
         }
+    }
+}
+
+/** Подписи входов: пустая подпись заменяется названием по умолчанию на текущем языке. */
+object Labels {
+    fun of(context: Context, e: EntryCfg): String {
+        if (e.label.isNotEmpty()) return e.label
+        return context.getString(if (e.mode == "app") R.string.label_app else R.string.label_site)
     }
 }
 
