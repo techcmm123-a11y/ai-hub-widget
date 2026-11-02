@@ -40,6 +40,10 @@ object Apps {
                 if (isInstalled(context, p)) return p
             }
         }
+        // Поиск по названию только для основных ИИ и своих сервисов: короткие названия
+        // (Bolt, Opal, Pika) легко совпадают с посторонними приложениями.
+        val labelMatchAllowed = svc.custom || (def != null && def.pkgs.isNotEmpty())
+        if (!labelMatchAllowed) return null
         val re = Regex("(^|[^\\p{L}\\p{N}])" + Regex.escape(svc.title) + "([^\\p{L}\\p{N}]|$)", RegexOption.IGNORE_CASE)
         val found = launchable(context).firstOrNull { re.containsMatchIn(it.label) }
         return found?.pkg

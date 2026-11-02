@@ -503,13 +503,14 @@ class MainActivity : Activity() {
         )
         rows.addView(Ui.label(this, getString(R.string.rows_count), 12f, Ui.SUB), lp(match, wrap, 10))
         rows.addView(
-            segmented(listOf(getString(R.string.auto_height), "1", "2"), cfg.rowsMode) { i ->
+            segmented(listOf(getString(R.string.auto_height), "1", "2", "3", "4"), cfg.rowsMode) { i ->
                 cfg.rowsMode = i
                 ConfigStore.save(this, cfg)
                 render()
             },
             lp(match, wrap, 4)
         )
+        rows.addView(Ui.label(this, getString(R.string.rows_hint), 12f, Ui.SUB), lp(match, wrap, 8))
         root.addView(rows, lp(match, wrap, 10))
 
         val cols = cardBox()
@@ -532,6 +533,7 @@ class MainActivity : Activity() {
             },
             lp(match, wrap, 4)
         )
+        cols.addView(Ui.label(this, getString(R.string.cols_hint), 12f, Ui.SUB), lp(match, wrap, 8))
         root.addView(cols, lp(match, wrap, 10))
 
         val aqCard = cardBox()

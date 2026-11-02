@@ -4,6 +4,8 @@
     android:initialLayout="@layout/widget_rows"
     android:minWidth="250dp"
     android:minHeight="70dp"
+    android:maxResizeWidth="470dp"
+    android:maxResizeHeight="330dp"
     android:previewImage="@drawable/preview_rows"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="4"

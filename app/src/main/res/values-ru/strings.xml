@@ -4,7 +4,7 @@
     <string name="widget_rows_name">AI Start: строки</string>
     <string name="widget_groups_name">AI Start: группы</string>
     <string name="widget_cols_name">AI Start: столбцы</string>
-    <string name="widget_rows_desc">Одна или две строки кнопок ваших ИИ и аккаунтов</string>
+    <string name="widget_rows_desc">До 6×4 ячеек: от одной до четырёх строк кнопок ваших ИИ и аккаунтов</string>
     <string name="widget_groups_desc">Ряд на каждый ИИ с кнопками приложения и аккаунтов</string>
     <string name="widget_cols_desc">Один или два вертикальных столбца кнопок</string>
     <string name="empty_hint">Откройте AI Start и выберите ИИ</string>
@@ -62,10 +62,10 @@
     <string name="w_rows_title">Виджет «Строки»</string>
     <string name="per_row">Кнопок в строке</string>
     <string name="rows_count">Строк</string>
-    <string name="auto_height">Авто по высоте</string>
+    <string name="auto_height">Авто</string>
     <string name="w_cols_title">Виджет «Столбцы»</string>
     <string name="cols_count">Столбцов</string>
-    <string name="auto_width">Авто по ширине</string>
+    <string name="auto_width">Авто</string>
     <string name="per_col">Кнопок в столбце</string>
     <string name="aquarium">Режим «аквариум»</string>
     <string name="aquarium_help">Кнопки покачиваются в воде, у каждой свой ритм. Кнопка со стрелками перемешивает расположение, а лишние кнопки листаются стрелками. Какие входы показывать, выбирается в самом входе.</string>
@@ -123,4 +123,6 @@
     <string name="chooser_play">Google Play</string>
     <string name="chooser_site">Сайт</string>
     <string name="play_unavailable">Не удалось открыть Google Play</string>
+    <string name="rows_hint">Авто выбирает число строк по высоте виджета. Виджет можно растянуть до 6×4 ячеек.</string>
+    <string name="cols_hint">Авто выбирает один или два столбца по ширине виджета.</string>
 </resources>

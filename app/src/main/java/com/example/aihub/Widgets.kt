@@ -153,10 +153,9 @@ object Widgets {
 
     /** Сколько строк показывать: по настройке либо по высоте виджета (две, если он вытянут). */
     fun rowsCount(cfg: Config, manager: AppWidgetManager, id: Int): Int {
-        if (cfg.rowsMode == 1) return 1
-        if (cfg.rowsMode == 2) return 2
+        if (cfg.rowsMode in 1..4) return cfg.rowsMode
         val h = manager.getAppWidgetOptions(id).getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 0)
-        return if (h >= 110) 2 else 1
+        return ((h + 8) / 72).coerceIn(1, 4)
     }
 
     fun turnRows(context: Context, id: Int, delta: Int) {
@@ -192,8 +191,9 @@ object Widgets {
         if (empty) {
             views.setOnClickPendingIntent(R.id.empty_rows, pending(context, 92, settingsIntent(context)))
         }
-        views.setViewVisibility(Ids.rowBox[0], if (empty) View.GONE else View.VISIBLE)
-        views.setViewVisibility(Ids.rowBox[1], if (empty || rows < 2) View.GONE else View.VISIBLE)
+        for (r in 0 until 4) {
+            views.setViewVisibility(Ids.rowBox[r], if (empty || r >= rows) View.GONE else View.VISIBLE)
+        }
 
         val paged = pages > 1
         views.setViewVisibility(R.id.nav_prev, if (paged) View.VISIBLE else View.GONE)
@@ -212,7 +212,7 @@ object Widgets {
             )
         }
 
-        for (r in 0 until 2) {
+        for (r in 0 until 4) {
             for (s in 0 until MAX_SLOTS) {
                 val slotId = if (aq) Ids.fl[r][s] else Ids.rt[r][s]
                 val idx = r * perRow + s

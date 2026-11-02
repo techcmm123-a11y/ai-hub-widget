@@ -129,6 +129,108 @@
                 android:padding="4dp"
                 android:scaleType="fitCenter" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rows_c"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:clipChildren="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/rt_2_0"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_2_1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_2_2"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_2_3"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_2_4"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_2_5"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rows_d"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:clipChildren="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/rt_3_0"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_3_1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_3_2"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_3_3"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_3_4"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/rt_3_5"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scaleType="fitCenter" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

@@ -133,11 +133,19 @@ class Config(
             val sa = o.optJSONArray("services") ?: JSONArray()
             for (i in 0 until sa.length()) {
                 val x = sa.getJSONObject(i)
+                val id = x.getString("id")
+                val custom = x.optBoolean("custom")
+                val def = if (custom) null else Catalog.byId(id)
+                // Для встроенных сервисов название, цвета и адрес берём из актуального каталога.
                 services.add(
                     ServiceCfg(
-                        x.getString("id"), x.optString("title"), x.optString("mono"),
-                        x.optInt("bg"), x.optInt("fg"), x.optString("url"),
-                        x.optBoolean("enabled"), x.optBoolean("custom"), x.optString("pkg")
+                        id,
+                        def?.title ?: x.optString("title"),
+                        def?.mono ?: x.optString("mono"),
+                        def?.bg ?: x.optInt("bg"),
+                        def?.fg ?: x.optInt("fg"),
+                        def?.url ?: x.optString("url"),
+                        x.optBoolean("enabled"), custom, x.optString("pkg")
                     )
                 )
             }
@@ -164,7 +172,7 @@ class Config(
             return Config(
                 o.optString("shape", "rounded"), o.optBoolean("realIcons", true),
                 o.optBoolean("aquarium", false), services, entries,
-                o.optInt("perRow", 5).coerceIn(4, 6), o.optInt("rowsMode", 0).coerceIn(0, 2),
+                o.optInt("perRow", 5).coerceIn(4, 6), o.optInt("rowsMode", 0).coerceIn(0, 4),
                 o.optInt("perCol", 5).coerceIn(3, 6), o.optInt("colsMode", 0).coerceIn(0, 2)
             )
         }

@@ -357,6 +357,336 @@
                     android:scaleType="fitCenter" />
             </ViewFlipper>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rows_c"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:clipChildren="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ViewFlipper
+                android:id="@+id/fl_2_0"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3000"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
+
+                <ImageView
+                    android:id="@+id/fa_2_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_2_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_2_1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3500"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
+
+                <ImageView
+                    android:id="@+id/fa_2_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_2_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_2_2"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="2700"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
+
+                <ImageView
+                    android:id="@+id/fa_2_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_2_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_2_3"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3300"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
+
+                <ImageView
+                    android:id="@+id/fa_2_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_2_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_2_4"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3800"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
+
+                <ImageView
+                    android:id="@+id/fa_2_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_2_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_2_5"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="2900"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
+
+                <ImageView
+                    android:id="@+id/fa_2_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_2_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rows_d"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:clipChildren="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ViewFlipper
+                android:id="@+id/fl_3_0"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3400"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
+
+                <ImageView
+                    android:id="@+id/fa_3_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_3_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_3_1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="2800"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
+
+                <ImageView
+                    android:id="@+id/fa_3_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_3_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_3_2"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3100"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
+
+                <ImageView
+                    android:id="@+id/fa_3_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_3_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_3_3"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3600"
+                android:inAnimation="@anim/fish_in_a"
+                android:outAnimation="@anim/fish_out_a">
+
+                <ImageView
+                    android:id="@+id/fa_3_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_3_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_3_4"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="2700"
+                android:inAnimation="@anim/fish_in_b"
+                android:outAnimation="@anim/fish_out_b">
+
+                <ImageView
+                    android:id="@+id/fa_3_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_3_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+            <ViewFlipper
+                android:id="@+id/fl_3_5"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:autoStart="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:flipInterval="3200"
+                android:inAnimation="@anim/fish_in_c"
+                android:outAnimation="@anim/fish_out_c">
+
+                <ImageView
+                    android:id="@+id/fa_3_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/fb_3_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter" />
+            </ViewFlipper>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

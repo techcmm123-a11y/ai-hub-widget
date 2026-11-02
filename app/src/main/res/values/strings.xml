@@ -4,7 +4,7 @@
     <string name="widget_rows_name">AI Start: rows</string>
     <string name="widget_groups_name">AI Start: groups</string>
     <string name="widget_cols_name">AI Start: columns</string>
-    <string name="widget_rows_desc">One or two rows of buttons for your AIs and accounts</string>
+    <string name="widget_rows_desc">Up to 6×4 cells: one to four rows of buttons for your AIs and accounts</string>
     <string name="widget_groups_desc">A row per AI with app and account buttons</string>
     <string name="widget_cols_desc">One or two vertical columns of buttons</string>
     <string name="empty_hint">Open AI Start and choose your AIs</string>
@@ -62,10 +62,10 @@
     <string name="w_rows_title">Rows widget</string>
     <string name="per_row">Buttons per row</string>
     <string name="rows_count">Rows</string>
-    <string name="auto_height">Auto by height</string>
+    <string name="auto_height">Auto</string>
     <string name="w_cols_title">Columns widget</string>
     <string name="cols_count">Columns</string>
-    <string name="auto_width">Auto by width</string>
+    <string name="auto_width">Auto</string>
     <string name="per_col">Buttons per column</string>
     <string name="aquarium">Aquarium mode</string>
     <string name="aquarium_help">Buttons sway in the water, each at its own pace. The shuffle button rearranges them, and extra buttons are paged with the arrows. Which entries appear is set in each entry.</string>
@@ -123,4 +123,6 @@
     <string name="chooser_play">Google Play</string>
     <string name="chooser_site">Website</string>
     <string name="play_unavailable">Could not open Google Play</string>
+    <string name="rows_hint">Auto picks the number of rows from the widget height. The widget can be stretched up to 6×4 cells.</string>
+    <string name="cols_hint">Auto picks one or two columns from the widget width.</string>
 </resources>

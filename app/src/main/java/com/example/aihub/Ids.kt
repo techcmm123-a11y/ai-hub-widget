@@ -10,11 +10,11 @@ object Ids {
     val chipWeb = arrayOf(intArrayOf(R.id.cweb_0_0, R.id.cweb_0_1, R.id.cweb_0_2), intArrayOf(R.id.cweb_1_0, R.id.cweb_1_1, R.id.cweb_1_2), intArrayOf(R.id.cweb_2_0, R.id.cweb_2_1, R.id.cweb_2_2), intArrayOf(R.id.cweb_3_0, R.id.cweb_3_1, R.id.cweb_3_2))
     val chipText = arrayOf(intArrayOf(R.id.ctext_0_0, R.id.ctext_0_1, R.id.ctext_0_2), intArrayOf(R.id.ctext_1_0, R.id.ctext_1_1, R.id.ctext_1_2), intArrayOf(R.id.ctext_2_0, R.id.ctext_2_1, R.id.ctext_2_2), intArrayOf(R.id.ctext_3_0, R.id.ctext_3_1, R.id.ctext_3_2))
 
-    val rowBox = intArrayOf(R.id.rows_a, R.id.rows_b)
-    val rt = arrayOf(intArrayOf(R.id.rt_0_0, R.id.rt_0_1, R.id.rt_0_2, R.id.rt_0_3, R.id.rt_0_4, R.id.rt_0_5), intArrayOf(R.id.rt_1_0, R.id.rt_1_1, R.id.rt_1_2, R.id.rt_1_3, R.id.rt_1_4, R.id.rt_1_5))
-    val fl = arrayOf(intArrayOf(R.id.fl_0_0, R.id.fl_0_1, R.id.fl_0_2, R.id.fl_0_3, R.id.fl_0_4, R.id.fl_0_5), intArrayOf(R.id.fl_1_0, R.id.fl_1_1, R.id.fl_1_2, R.id.fl_1_3, R.id.fl_1_4, R.id.fl_1_5))
-    val fa = arrayOf(intArrayOf(R.id.fa_0_0, R.id.fa_0_1, R.id.fa_0_2, R.id.fa_0_3, R.id.fa_0_4, R.id.fa_0_5), intArrayOf(R.id.fa_1_0, R.id.fa_1_1, R.id.fa_1_2, R.id.fa_1_3, R.id.fa_1_4, R.id.fa_1_5))
-    val fb = arrayOf(intArrayOf(R.id.fb_0_0, R.id.fb_0_1, R.id.fb_0_2, R.id.fb_0_3, R.id.fb_0_4, R.id.fb_0_5), intArrayOf(R.id.fb_1_0, R.id.fb_1_1, R.id.fb_1_2, R.id.fb_1_3, R.id.fb_1_4, R.id.fb_1_5))
+    val rowBox = intArrayOf(R.id.rows_a, R.id.rows_b, R.id.rows_c, R.id.rows_d)
+    val rt = arrayOf(intArrayOf(R.id.rt_0_0, R.id.rt_0_1, R.id.rt_0_2, R.id.rt_0_3, R.id.rt_0_4, R.id.rt_0_5), intArrayOf(R.id.rt_1_0, R.id.rt_1_1, R.id.rt_1_2, R.id.rt_1_3, R.id.rt_1_4, R.id.rt_1_5), intArrayOf(R.id.rt_2_0, R.id.rt_2_1, R.id.rt_2_2, R.id.rt_2_3, R.id.rt_2_4, R.id.rt_2_5), intArrayOf(R.id.rt_3_0, R.id.rt_3_1, R.id.rt_3_2, R.id.rt_3_3, R.id.rt_3_4, R.id.rt_3_5))
+    val fl = arrayOf(intArrayOf(R.id.fl_0_0, R.id.fl_0_1, R.id.fl_0_2, R.id.fl_0_3, R.id.fl_0_4, R.id.fl_0_5), intArrayOf(R.id.fl_1_0, R.id.fl_1_1, R.id.fl_1_2, R.id.fl_1_3, R.id.fl_1_4, R.id.fl_1_5), intArrayOf(R.id.fl_2_0, R.id.fl_2_1, R.id.fl_2_2, R.id.fl_2_3, R.id.fl_2_4, R.id.fl_2_5), intArrayOf(R.id.fl_3_0, R.id.fl_3_1, R.id.fl_3_2, R.id.fl_3_3, R.id.fl_3_4, R.id.fl_3_5))
+    val fa = arrayOf(intArrayOf(R.id.fa_0_0, R.id.fa_0_1, R.id.fa_0_2, R.id.fa_0_3, R.id.fa_0_4, R.id.fa_0_5), intArrayOf(R.id.fa_1_0, R.id.fa_1_1, R.id.fa_1_2, R.id.fa_1_3, R.id.fa_1_4, R.id.fa_1_5), intArrayOf(R.id.fa_2_0, R.id.fa_2_1, R.id.fa_2_2, R.id.fa_2_3, R.id.fa_2_4, R.id.fa_2_5), intArrayOf(R.id.fa_3_0, R.id.fa_3_1, R.id.fa_3_2, R.id.fa_3_3, R.id.fa_3_4, R.id.fa_3_5))
+    val fb = arrayOf(intArrayOf(R.id.fb_0_0, R.id.fb_0_1, R.id.fb_0_2, R.id.fb_0_3, R.id.fb_0_4, R.id.fb_0_5), intArrayOf(R.id.fb_1_0, R.id.fb_1_1, R.id.fb_1_2, R.id.fb_1_3, R.id.fb_1_4, R.id.fb_1_5), intArrayOf(R.id.fb_2_0, R.id.fb_2_1, R.id.fb_2_2, R.id.fb_2_3, R.id.fb_2_4, R.id.fb_2_5), intArrayOf(R.id.fb_3_0, R.id.fb_3_1, R.id.fb_3_2, R.id.fb_3_3, R.id.fb_3_4, R.id.fb_3_5))
 
     val colBox = intArrayOf(R.id.vcol_0, R.id.vcol_1)
     val vt = arrayOf(intArrayOf(R.id.vt_0_0, R.id.vt_0_1, R.id.vt_0_2, R.id.vt_0_3, R.id.vt_0_4, R.id.vt_0_5), intArrayOf(R.id.vt_1_0, R.id.vt_1_1, R.id.vt_1_2, R.id.vt_1_3, R.id.vt_1_4, R.id.vt_1_5))

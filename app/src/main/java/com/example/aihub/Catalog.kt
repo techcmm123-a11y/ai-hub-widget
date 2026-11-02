@@ -39,7 +39,7 @@ object Catalog {
     }
 
     val list: List<Def> = listOf(
-        // Текст и чат
+        // ---------- Текст и чат ----------
         Def("claude", "Claude", "Cl", 0xFF3B2A24.toInt(), 0xFFEE8F70.toInt(),
             "https://claude.ai", listOf("com.anthropic.claude"), "com.anthropic.claude", "chat"),
         Def("chatgpt", "ChatGPT", "GPT", 0xFF173730.toInt(), 0xFF46D1A8.toInt(),
@@ -63,15 +63,31 @@ object Catalog {
         d("kimi", "Kimi", "Ki", "https://www.kimi.com", "chat", 1),
         d("qwen", "Qwen", "Qw", "https://chat.qwen.ai", "chat", 3),
         d("characterai", "Character.AI", "Ch", "https://character.ai", "chat", 6),
+        d("huggingchat", "HuggingChat", "HF", "https://huggingface.co/chat", "chat", 5),
+        d("doubao", "Doubao", "Db", "https://www.doubao.com", "chat", 2),
+        d("zai", "Z.ai", "Zi", "https://chat.z.ai", "chat", 4),
+        d("youcom", "You.com", "Yo", "https://you.com", "chat", 7),
 
-        // Картинки
+        // ---------- Картинки ----------
         d("midjourney", "Midjourney", "Mj", "https://www.midjourney.com", "image", 2),
         d("firefly", "Adobe Firefly", "Ff", "https://firefly.adobe.com", "image", 6),
         d("leonardo", "Leonardo", "Le", "https://leonardo.ai", "image", 5),
         d("ideogram", "Ideogram", "Id", "https://ideogram.ai", "image", 4),
         d("krea", "Krea", "Kr", "https://www.krea.ai", "image", 0),
+        d("flux", "FLUX", "Fx", "https://bfl.ai", "image", 3),
+        d("recraft", "Recraft", "Rc", "https://www.recraft.ai", "image", 1),
+        d("stability", "Stability AI", "Sb", "https://stability.ai", "image", 7),
+        d("canva", "Canva", "Cv", "https://www.canva.com", "image", 2),
+        d("designer", "Microsoft Designer", "Md", "https://designer.microsoft.com", "image", 4),
+        d("freepik", "Freepik", "Fp", "https://www.freepik.com/ai", "image", 5),
+        d("photoroom", "Photoroom", "Pr", "https://www.photoroom.com", "image", 6),
+        d("clipdrop", "Clipdrop", "Cd", "https://clipdrop.co", "image", 0),
+        d("remini", "Remini", "Rm", "https://remini.ai", "image", 3),
+        d("playground", "Playground", "Pg", "https://playground.com", "image", 1),
+        d("mixboard", "Mixboard", "Mb", "https://labs.google.com/mixboard/welcome", "image", 7),
 
-        // Видео
+        // ---------- Видео ----------
+        d("flow", "Google Flow", "Fl", "https://flow.google", "video", 2),
         d("sora", "Sora", "So", "https://sora.com", "video", 3),
         d("runway", "Runway", "Rw", "https://runwayml.com", "video", 7),
         d("pika", "Pika", "Pk", "https://pika.art", "video", 1),
@@ -79,26 +95,64 @@ object Catalog {
         d("kling", "Kling", "Kl", "https://klingai.com", "video", 4),
         d("hailuo", "Hailuo", "Hl", "https://hailuoai.video", "video", 5),
         d("heygen", "HeyGen", "Hg", "https://www.heygen.com", "video", 6),
+        d("vidu", "Vidu", "Vd", "https://www.vidu.com", "video", 0),
+        d("hedra", "Hedra", "Hd", "https://www.hedra.com", "video", 3),
+        d("higgsfield", "Higgsfield", "Hf", "https://higgsfield.ai", "video", 1),
+        d("dreamina", "Dreamina", "Dm", "https://dreamina.capcut.com", "video", 6),
+        d("synthesia", "Synthesia", "Sy", "https://www.synthesia.io", "video", 7),
+        d("capcut", "CapCut", "Cc", "https://www.capcut.com", "video", 4),
+        d("opusclip", "Opus Clip", "Oc", "https://www.opus.pro", "video", 5),
+        d("descript", "Descript", "De", "https://www.descript.com", "video", 2),
+        d("veed", "VEED", "Ve", "https://www.veed.io", "video", 0),
+        d("did", "D-ID", "Di", "https://www.d-id.com", "video", 3),
 
-        // Музыка и голос
+        // ---------- Музыка и голос ----------
+        d("flowmusic", "Flow Music", "FM", "https://flowmusic.app", "music", 2),
         d("suno", "Suno", "Su", "https://suno.com", "music", 0),
         d("udio", "Udio", "Ud", "https://www.udio.com", "music", 3),
         d("elevenlabs", "ElevenLabs", "11", "https://elevenlabs.io", "music", 7),
         d("speechify", "Speechify", "Sp", "https://speechify.com", "music", 2),
+        d("stableaudio", "Stable Audio", "Sa", "https://stableaudio.com", "music", 4),
+        d("mubert", "Mubert", "Mu", "https://mubert.com", "music", 5),
+        d("soundraw", "Soundraw", "Sw", "https://soundraw.io", "music", 6),
+        d("aiva", "AIVA", "Av", "https://www.aiva.ai", "music", 1),
+        d("murf", "Murf", "Mf", "https://murf.ai", "music", 0),
+        d("moises", "Moises", "Mo", "https://moises.ai", "music", 3),
+        d("landr", "LANDR", "La", "https://www.landr.com", "music", 7),
+        d("wondercraft", "Wondercraft", "Wc", "https://www.wondercraft.ai", "music", 4),
 
-        // Код
+        // ---------- Код ----------
+        d("claudecode", "Claude Code", "CC", "https://claude.ai/code", "code", 6),
+        d("codex", "Codex", "Cx", "https://chatgpt.com/codex", "code", 4),
         d("githubcopilot", "GitHub Copilot", "GC", "https://github.com/features/copilot", "code", 4),
         d("cursor", "Cursor", "Cu", "https://cursor.com", "code", 7),
+        d("windsurf", "Windsurf", "Ws", "https://windsurf.com", "code", 2),
         d("replit", "Replit", "Rp", "https://replit.com", "code", 5),
         d("lovable", "Lovable", "Lv", "https://lovable.dev", "code", 0),
         d("v0", "v0", "v0", "https://v0.dev", "code", 1),
+        d("bolt", "Bolt", "Bo", "https://bolt.new", "code", 3),
+        d("jules", "Jules", "Ju", "https://jules.google", "code", 2),
+        d("aistudio", "Google AI Studio", "AS", "https://aistudio.google.com", "code", 5),
+        d("stitch", "Stitch", "St", "https://stitch.withgoogle.com", "code", 6),
+        d("opal", "Opal", "Op", "https://opal.withgoogle.com", "code", 7),
+        d("devin", "Devin", "Dv", "https://devin.ai", "code", 0),
 
-        // Исследования и работа
-        d("notebooklm", "NotebookLM", "NB", "https://notebooklm.google.com", "work", 2),
+        // ---------- Исследования и работа ----------
+        d("notebooklm", "Gemini Notebook", "GN", "https://notebooklm.google.com", "work", 2),
         d("gamma", "Gamma", "Ga", "https://gamma.app", "work", 3),
         d("consensus", "Consensus", "Cs", "https://consensus.app", "work", 4),
         d("otter", "Otter", "Ot", "https://otter.ai", "work", 7),
-        d("deepl", "DeepL", "DL", "https://www.deepl.com", "work", 2)
+        d("deepl", "DeepL", "DL", "https://www.deepl.com", "work", 2),
+        d("napkin", "Napkin", "Nk", "https://www.napkin.ai", "work", 5),
+        d("fireflies", "Fireflies", "Fi", "https://fireflies.ai", "work", 6),
+        d("fathom", "Fathom", "Fa", "https://fathom.video", "work", 1),
+        d("grammarly", "Grammarly", "Gr", "https://www.grammarly.com", "work", 4),
+        d("notion", "Notion AI", "No", "https://www.notion.so", "work", 0),
+        d("beautiful", "Beautiful.ai", "Ba", "https://www.beautiful.ai", "work", 3),
+        d("julius", "Julius AI", "Jl", "https://julius.ai", "work", 7),
+        d("elicit", "Elicit", "El", "https://elicit.com", "work", 5),
+        d("scite", "Scite", "Sc", "https://scite.ai", "work", 1),
+        d("quillbot", "QuillBot", "Qb", "https://quillbot.com", "work", 2)
     )
 
     fun byId(id: String): Def? = list.firstOrNull { it.id == id }
