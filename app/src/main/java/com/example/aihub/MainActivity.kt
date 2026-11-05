@@ -1,7 +1,6 @@
 package com.example.aihub
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.appwidget.AppWidgetManager
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -36,6 +35,7 @@ class MainActivity : Activity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Ui.apply(this)
         super.onCreate(savedInstanceState)
         section = savedInstanceState?.getString("section") ?: "home"
         scroll = ScrollView(this)
@@ -45,6 +45,7 @@ class MainActivity : Activity() {
         root.setPadding(p, p, p, p)
         scroll.addView(root)
         setContentView(scroll)
+        Ui.bars(this)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -54,6 +55,9 @@ class MainActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
+        // Свежая проверка приложений при каждом открытии: новые установки видны сразу.
+        Apps.refresh()
+        Widgets.updateAll(this)
         render()
     }
 
@@ -72,6 +76,14 @@ class MainActivity : Activity() {
         val y = scroll.scrollY
         render()
         scroll.post { scroll.scrollTo(0, y) }
+    }
+
+    private fun recheck(cfg: Config) {
+        Apps.refresh()
+        Widgets.updateAll(this)
+        val found = cfg.services.count { it.enabled && Apps.packageFor(this, it) != null }
+        Toast.makeText(this, getString(R.string.recheck_done, found), Toast.LENGTH_LONG).show()
+        render()
     }
 
     private fun render() {
@@ -129,7 +141,7 @@ class MainActivity : Activity() {
         val h = Ui.dp(this, 44)
         for (i in options.indices) {
             val sel = i == selected
-            val b = button(options[i], if (sel) Ui.ACCENT else Ui.ROW, if (sel) Ui.DARK else Ui.TEXT)
+            val b = button(options[i], if (sel) Ui.ACCENT else Ui.ROW, if (sel) Ui.ON_ACCENT else Ui.TEXT)
             b.setOnClickListener { onPick(i) }
             val l = LinearLayout.LayoutParams(0, h, 1f)
             if (i > 0) l.marginStart = Ui.dp(this, 8)
@@ -210,10 +222,14 @@ class MainActivity : Activity() {
     private fun sectionMy(cfg: Config) {
         header(getString(R.string.menu_my))
         caption(getString(R.string.my_intro), 4)
+        val re = button(getString(R.string.recheck), Ui.ROW, Ui.TEXT)
+        re.setOnClickListener { recheck(cfg) }
+        root.addView(re, lp(match, Ui.dp(this, 46), 10))
+        caption(getString(R.string.recheck_hint), 6)
         val enabled = cfg.services.filter { it.enabled }
         if (enabled.isEmpty()) {
             caption(getString(R.string.my_empty), 14)
-            val go = button(getString(R.string.go_choose), Ui.ACCENT, Ui.DARK)
+            val go = button(getString(R.string.go_choose), Ui.ACCENT, Ui.ON_ACCENT)
             go.setOnClickListener { open("choose") }
             root.addView(go, lp(match, Ui.dp(this, 48), 10))
         }
@@ -283,9 +299,14 @@ class MainActivity : Activity() {
     }
 
     private fun summary(svc: ServiceCfg, e: EntryCfg): String {
-        val hidden = if (e.inRows) "" else getString(R.string.sum_hidden)
+        val hidden = if (e.inRows) "" else " " + getString(R.string.sum_hidden)
+        if (e.mode == "pwa") {
+            val name = if (e.pkg.isNotEmpty() && Apps.isInstalled(this, e.pkg)) Apps.label(this, e.pkg) else null
+            return getString(R.string.sum_pwa, name ?: getString(R.string.sum_pwa_none)) + hidden
+        }
         if (e.mode == "app") {
-            val name = Apps.label(this, Apps.packageFor(this, svc)) ?: getString(R.string.sum_app_missing)
+            val pkg = Apps.packageForEntry(this, svc, e)
+            val name = Apps.label(this, pkg) ?: getString(R.string.sum_app_missing)
             return getString(R.string.sum_app, name) + hidden
         }
         val browserPkg = if (e.browserPkg.isEmpty()) null else e.browserPkg
@@ -341,7 +362,7 @@ class MainActivity : Activity() {
         url.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI
         box.addView(name)
         box.addView(url)
-        AlertDialog.Builder(this)
+        Ui.dialog(this)
             .setTitle(R.string.custom_title)
             .setView(box)
             .setPositiveButton(R.string.add) { _, _ ->
@@ -435,6 +456,25 @@ class MainActivity : Activity() {
 
     private fun sectionLook(cfg: Config) {
         header(getString(R.string.menu_look))
+
+        val themeCard = cardBox()
+        themeCard.addView(Ui.label(this, getString(R.string.theme_title), 17f, Ui.TEXT, true))
+        val codes = arrayOf("auto", "light", "dark")
+        val current = codes.indexOf(Skin.pref(this)).coerceAtLeast(0)
+        themeCard.addView(
+            segmented(
+                listOf(getString(R.string.theme_auto), getString(R.string.theme_light), getString(R.string.theme_dark)),
+                current
+            ) { i ->
+                Skin.setPref(this, codes[i])
+                Widgets.updateAll(this)
+                recreate()
+            },
+            lp(match, wrap, 8)
+        )
+        themeCard.addView(Ui.label(this, getString(R.string.theme_help), 12f, Ui.SUB), lp(match, wrap, 8))
+        root.addView(themeCard, lp(match, wrap, 10))
+
         val card = cardBox()
         card.addView(Ui.label(this, getString(R.string.look_shape), 17f, Ui.TEXT, true))
         card.addView(
@@ -554,21 +594,26 @@ class MainActivity : Activity() {
 
     private fun sectionLang() {
         header(getString(R.string.menu_lang))
-        val codes = arrayOf("auto", "ru", "en")
-        val current = codes.indexOf(L.pref(this)).coerceAtLeast(0)
-        val card = cardBox()
-        card.addView(
-            segmented(
-                listOf(getString(R.string.lang_auto), getString(R.string.lang_ru), getString(R.string.lang_en)),
-                current
-            ) { i ->
-                L.setPref(this, codes[i])
-                Widgets.updateAll(this)
-                recreate()
-            }
-        )
-        card.addView(Ui.label(this, getString(R.string.lang_help), 12f, Ui.SUB), lp(match, wrap, 10))
-        root.addView(card, lp(match, wrap, 10))
+        val current = L.pref(this)
+        root.addView(langRow("auto", getString(R.string.lang_auto), current == "auto"), lp(match, wrap, 10))
+        for (l in L.LANGS) {
+            root.addView(langRow(l.first, l.second, current == l.first), lp(match, wrap, 6))
+        }
+        caption(getString(R.string.lang_help), 12)
+    }
+
+    private fun langRow(code: String, name: String, selected: Boolean): View {
+        val row = cardBox()
+        row.orientation = LinearLayout.HORIZONTAL
+        row.gravity = Gravity.CENTER_VERTICAL
+        row.addView(Ui.label(this, name, 16f, Ui.TEXT, selected), LinearLayout.LayoutParams(0, wrap, 1f))
+        if (selected) row.addView(Ui.label(this, "✓", 18f, Ui.ACCENT, true))
+        row.setOnClickListener {
+            L.setPref(this, code)
+            Widgets.updateAll(this)
+            recreate()
+        }
+        return row
     }
 
     // ---------------------------------------------------------- «Резервная копия»
@@ -605,7 +650,7 @@ class MainActivity : Activity() {
         field.hint = getString(R.string.restore_hint)
         field.minLines = 3
         box.addView(field)
-        AlertDialog.Builder(this)
+        Ui.dialog(this)
             .setTitle(R.string.restore_title)
             .setView(box)
             .setPositiveButton(R.string.restore) { _, _ ->
@@ -642,7 +687,7 @@ class MainActivity : Activity() {
         val donate = cardBox()
         donate.addView(Ui.label(this, getString(R.string.donate_title), 17f, Ui.TEXT, true))
         donate.addView(Ui.label(this, getString(R.string.donate_text), 13f, Ui.SUB), lp(match, wrap, 6))
-        val db = button(getString(R.string.donate_button), Ui.ACCENT, Ui.DARK)
+        val db = button(getString(R.string.donate_button), Ui.ACCENT, Ui.ON_ACCENT)
         db.setOnClickListener {
             if (Links.DONATE_URL.isEmpty()) {
                 Toast.makeText(this, R.string.donate_unset, Toast.LENGTH_LONG).show()
@@ -659,9 +704,12 @@ class MainActivity : Activity() {
 
         val info = cardBox()
         info.addView(Ui.label(this, getString(R.string.found_apps), 15f, Ui.TEXT, true))
+        val re2 = button(getString(R.string.recheck), Ui.ROW, Ui.TEXT)
+        re2.setOnClickListener { recheck(cfg) }
+        info.addView(re2, lp(match, Ui.dp(this, 46), 8))
         info.addView(
             Ui.label(this, getString(R.string.apps_count, Apps.launchable(this).size), 12f, Ui.SUB),
-            lp(match, wrap, 4)
+            lp(match, wrap, 8)
         )
         for (svc in cfg.services) {
             if (!svc.enabled) continue

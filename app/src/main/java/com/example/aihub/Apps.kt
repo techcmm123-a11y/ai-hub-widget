@@ -8,10 +8,26 @@ object Apps {
 
     class App(val pkg: String, val label: String)
 
+    /** Основные ИИ: для них названия ищутся в подписях приложений свободнее. */
+    private val CORE = setOf(
+        "claude", "chatgpt", "gemini", "perplexity", "grok", "deepseek", "copilot", "mistral", "meta"
+    )
+
+    /** Слишком общие названия: по подписи не ищем, только по известному имени пакета или ручному выбору. */
+    private val NO_LABEL_MATCH = setOf(
+        "bolt", "opal", "stitch", "jules", "windsurf", "cursor", "flux", "gamma", "otter",
+        "fathom", "consensus", "playground", "luma", "pika", "devin", "codex", "flow"
+    )
+
     private var cache: List<App>? = null
     private var cacheAt = 0L
 
-    /** Все приложения, у которых есть значок запуска (кроме самого ИИ-запуска). Список кэшируется на 15 секунд. */
+    /** Сбросить запомненный список приложений, чтобы следующая проверка увидела свежие установки. */
+    fun refresh() {
+        cache = null
+    }
+
+    /** Все приложения, у которых есть значок запуска (кроме самого AI Start). Список кэшируется на 15 секунд. */
     fun launchable(context: Context): List<App> {
         val now = System.currentTimeMillis()
         val cached = cache
@@ -31,6 +47,19 @@ object Apps {
     fun isInstalled(context: Context, pkg: String): Boolean =
         pkg.isNotEmpty() && context.packageManager.getLaunchIntentForPackage(pkg) != null
 
+    private fun labelMatches(svc: ServiceCfg, label: String): Boolean {
+        val title = Regex.escape(svc.title)
+        val loose = svc.custom || svc.id in CORE
+        val re = if (loose) {
+            // Слово целиком в любом месте подписи: «Microsoft Copilot», «Perplexity: Ask Anything».
+            Regex("(^|[^\\p{L}\\p{N}])" + title + "([^\\p{L}\\p{N}]|$)", RegexOption.IGNORE_CASE)
+        } else {
+            // Подпись начинается с названия: «Poe - Fast AI Chat», «Kimi».
+            Regex("^" + title + "([^\\p{L}\\p{N}].*)?$", RegexOption.IGNORE_CASE)
+        }
+        return re.containsMatchIn(label.trim())
+    }
+
     /** Пакет приложения сервиса: выбранный вручную, известный или найденный по названию. */
     fun packageFor(context: Context, svc: ServiceCfg): String? {
         if (isInstalled(context, svc.pkg)) return svc.pkg
@@ -40,13 +69,16 @@ object Apps {
                 if (isInstalled(context, p)) return p
             }
         }
-        // Поиск по названию только для основных ИИ и своих сервисов: короткие названия
-        // (Bolt, Opal, Pika) легко совпадают с посторонними приложениями.
-        val labelMatchAllowed = svc.custom || (def != null && def.pkgs.isNotEmpty())
-        if (!labelMatchAllowed) return null
-        val re = Regex("(^|[^\\p{L}\\p{N}])" + Regex.escape(svc.title) + "([^\\p{L}\\p{N}]|$)", RegexOption.IGNORE_CASE)
-        val found = launchable(context).firstOrNull { re.containsMatchIn(it.label) }
+        if (!svc.custom && svc.id in NO_LABEL_MATCH) return null
+        val found = launchable(context).firstOrNull { labelMatches(svc, it.label) }
         return found?.pkg
+    }
+
+    /** Пакет для входа: выбранный в самом входе либо найденный для сервиса (веб-приложения только выбранные). */
+    fun packageForEntry(context: Context, svc: ServiceCfg, e: EntryCfg): String? {
+        if (e.pkg.isNotEmpty() && isInstalled(context, e.pkg)) return e.pkg
+        if (e.mode == "pwa") return null
+        return packageFor(context, svc)
     }
 
     fun label(context: Context, pkg: String?): String? {

@@ -27,7 +27,8 @@ class EntryCfg(
     var browserPkg: String,
     var url: String,
     var color: Int,
-    var inRows: Boolean = true
+    var inRows: Boolean = true,
+    var pkg: String = ""
 )
 
 class Config(
@@ -80,6 +81,7 @@ class Config(
             x.put("url", e.url)
             x.put("color", e.color)
             x.put("inRows", e.inRows)
+            x.put("pkg", e.pkg)
             ea.put(x)
         }
         o.put("entries", ea)
@@ -159,13 +161,25 @@ class Config(
             for (i in 0 until ea.length()) {
                 val x = ea.getJSONObject(i)
                 var label = x.optString("label")
+                var mode = x.optString("mode", "web")
+                val serviceId = x.getString("service")
+                val browser = x.optString("browser")
+                val url = x.optString("url")
+                var color = x.optInt("color", COLOR_BLUE)
                 // Старые версии сохраняли подпись по умолчанию как текст: переводим в «пусто».
+                val wasDefaultSite = (label == "Сайт" || label == "Site") && mode == "web" &&
+                    browser.isEmpty() && url.isEmpty()
                 if (label == "Приложение" || label == "Сайт" || label == "App" || label == "Site") label = ""
+                // Вход «Сайт» по умолчанию мог появиться, когда приложения ещё не было на телефоне.
+                // Для ИИ с приложением превращаем его во вход «Приложение»: оно ищется в момент нажатия.
+                if (wasDefaultSite && (Catalog.byId(serviceId)?.pkgs?.isNotEmpty() == true)) {
+                    mode = "app"
+                    color = COLOR_APP
+                }
                 entries.add(
                     EntryCfg(
-                        x.getString("id"), x.getString("service"), label,
-                        x.optString("mode", "web"), x.optString("browser"), x.optString("url"),
-                        x.optInt("color", COLOR_BLUE), x.optBoolean("inRows", true)
+                        x.getString("id"), serviceId, label, mode, browser, url,
+                        color, x.optBoolean("inRows", true), x.optString("pkg")
                     )
                 )
             }

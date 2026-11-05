@@ -1,7 +1,6 @@
 package com.example.aihub
 
 import android.content.Context
-import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -22,13 +21,15 @@ object Tiles {
         cfg: Config,
         size: Int,
         badge: String = "",
-        badgeColor: Int = 0
+        badgeColor: Int = 0,
+        iconPkg: String? = null
     ): Bitmap {
         val bmp = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bmp)
 
-        val icon: Drawable? = if (cfg.realIcons) Apps.icon(context, Apps.packageFor(context, svc)) else null
-        if (icon != null) drawIcon(canvas, icon, size) else drawMono(canvas, svc, size)
+        val pkg = iconPkg ?: Apps.packageFor(context, svc)
+        val icon: Drawable? = if (cfg.realIcons) Apps.icon(context, pkg) else null
+        if (icon != null) drawIcon(canvas, icon, size) else drawMono(context, canvas, svc, size)
 
         // Маска нужной формы со сглаженными краями.
         val maskBmp = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
@@ -70,12 +71,20 @@ object Tiles {
         }
     }
 
-    private fun drawMono(canvas: Canvas, svc: ServiceCfg, size: Int) {
+    private fun blend(a: Int, b: Int, t: Float): Int {
+        val r = (Color.red(a) * (1f - t) + Color.red(b) * t).toInt()
+        val g = (Color.green(a) * (1f - t) + Color.green(b) * t).toInt()
+        val bl = (Color.blue(a) * (1f - t) + Color.blue(b) * t).toInt()
+        return Color.rgb(r, g, bl)
+    }
+
+    private fun drawMono(context: Context, canvas: Canvas, svc: ServiceCfg, size: Int) {
+        val dark = Skin.isDark(context)
         val bg = Paint(Paint.ANTI_ALIAS_FLAG)
-        bg.color = svc.bg
+        bg.color = if (dark) svc.bg else blend(svc.fg, Color.WHITE, 0.80f)
         canvas.drawRect(0f, 0f, size.toFloat(), size.toFloat(), bg)
         val t = Paint(Paint.ANTI_ALIAS_FLAG)
-        t.color = svc.fg
+        t.color = if (dark) svc.fg else blend(svc.fg, Color.BLACK, 0.50f)
         t.typeface = Typeface.DEFAULT_BOLD
         t.textAlign = Paint.Align.CENTER
         t.textSize = if (svc.mono.length >= 3) size * 0.26f else size * 0.34f
@@ -86,10 +95,8 @@ object Tiles {
         val r = size * 0.21f
         val cx = size - r
         val cy = size - r
-        val night = (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
-            Configuration.UI_MODE_NIGHT_YES
         val ring = Paint(Paint.ANTI_ALIAS_FLAG)
-        ring.color = if (night) 0xFF15171B.toInt() else 0xFFFBFAF7.toInt()
+        ring.color = if (Skin.isDark(context)) 0xFF15171B.toInt() else 0xFFFBFAF7.toInt()
         canvas.drawCircle(cx, cy, r + size * 0.03f, ring)
         val dot = Paint(Paint.ANTI_ALIAS_FLAG)
         dot.color = color

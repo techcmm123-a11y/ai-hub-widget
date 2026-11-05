@@ -24,7 +24,7 @@
     <string name="menu_widgets">Виджеты</string>
     <string name="menu_widgets_sub">Строки, столбцы, аквариум</string>
     <string name="menu_lang">Язык</string>
-    <string name="menu_lang_sub">Авто, русский, английский</string>
+    <string name="menu_lang_sub">Авто или выбор языка</string>
     <string name="menu_backup">Резервная копия</string>
     <string name="menu_backup_sub">Копирование и восстановление</string>
     <string name="menu_about">О приложении и поддержка</string>
@@ -69,10 +69,8 @@
     <string name="per_col">Кнопок в столбце</string>
     <string name="aquarium">Режим «аквариум»</string>
     <string name="aquarium_help">Кнопки покачиваются в воде, у каждой свой ритм. Кнопка со стрелками перемешивает расположение, а лишние кнопки листаются стрелками. Какие входы показывать, выбирается в самом входе.</string>
-    <string name="lang_help">Авто: русский, если телефон на русском, иначе английский.</string>
+    <string name="lang_help">Авто: язык телефона, если он поддерживается, иначе английский.</string>
     <string name="lang_auto">Авто</string>
-    <string name="lang_ru">Русский</string>
-    <string name="lang_en">English</string>
     <string name="backup_help">Копирует настройки в буфер обмена как текст. Сохраните его в заметках, чтобы восстановить после переустановки.</string>
     <string name="copy">Копировать</string>
     <string name="paste">Вставить</string>
@@ -98,7 +96,7 @@
     <string name="entry_name_hint">Например: Личный, Работа</string>
     <string name="how_open">Как открыть</string>
     <string name="mode_app">Приложение</string>
-    <string name="mode_web">Сайт в браузере</string>
+    <string name="mode_web">Сайт</string>
     <string name="app_found">Найдено: %1$s</string>
     <string name="app_missing">Приложение не найдено. Выберите вручную; при нажатии предложим установить его или открыть сайт.</string>
     <string name="pick_app">Выбрать другое приложение</string>
@@ -117,7 +115,7 @@
     <string name="sum_app">Приложение: %1$s</string>
     <string name="sum_app_missing">не найдено, предложим установить или сайт</string>
     <string name="sum_web">Сайт · %1$s</string>
-    <string name="sum_hidden"> · скрыт в виджетах</string>
+    <string name="sum_hidden">· скрыт в виджетах</string>
     <string name="chooser_title">%1$s не установлено</string>
     <string name="chooser_msg">Установить из Google Play или открыть официальный сайт?</string>
     <string name="chooser_play">Google Play</string>
@@ -125,4 +123,26 @@
     <string name="play_unavailable">Не удалось открыть Google Play</string>
     <string name="rows_hint">Авто выбирает число строк по высоте виджета. Виджет можно растянуть до 6×4 ячеек.</string>
     <string name="cols_hint">Авто выбирает один или два столбца по ширине виджета.</string>
+    <string name="recheck">Перепроверить приложения</string>
+    <string name="recheck_done">Перепроверено. Найдено ИИ-приложений: %1$d</string>
+    <string name="recheck_hint">Нажмите после установки приложения. Проверка идёт и при каждом открытии AI Start, а кнопки в виджетах проверяют приложение в момент нажатия.</string>
+    <string name="theme_title">Тема</string>
+    <string name="theme_auto">Как в системе</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="theme_help">Применяется к приложению и виджетам. «Как в системе» следует тёмному режиму телефона.</string>
+    <string name="mode_pwa">Веб-приложение</string>
+    <string name="pwa_help">Веб-приложение — это сайт, установленный как приложение. Откройте сайт в Chrome, выберите «Установить приложение» или «Добавить на главный экран», затем выберите его здесь.</string>
+    <string name="pwa_open_site">Открыть сайт для установки</string>
+    <string name="pwa_chosen">Веб-приложение: %1$s</string>
+    <string name="pwa_none">Веб-приложение пока не выбрано</string>
+    <string name="pwa_pick">Выбрать установленное веб-приложение</string>
+    <string name="pwa_pick_title">Веб-приложения</string>
+    <string name="pwa_pick_all">Показать все приложения…</string>
+    <string name="chooser_pwa_title">Веб-приложение %1$s не настроено</string>
+    <string name="chooser_pwa_msg">Откройте сайт, затем в меню браузера выберите «Установить приложение» или «Добавить на главный экран». После этого выберите его в этом входе.</string>
+    <string name="chooser_open_site">Открыть сайт</string>
+    <string name="sum_pwa">Веб-приложение: %1$s</string>
+    <string name="sum_pwa_none">ещё не выбрано</string>
+    <string name="pick_auto">Автоматически</string>
 </resources>

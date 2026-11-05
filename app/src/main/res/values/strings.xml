@@ -24,7 +24,7 @@
     <string name="menu_widgets">Widgets</string>
     <string name="menu_widgets_sub">Rows, columns, aquarium</string>
     <string name="menu_lang">Language</string>
-    <string name="menu_lang_sub">Automatic, Russian, English</string>
+    <string name="menu_lang_sub">Automatic or choose a language</string>
     <string name="menu_backup">Backup</string>
     <string name="menu_backup_sub">Copy and restore settings</string>
     <string name="menu_about">About and support</string>
@@ -69,10 +69,8 @@
     <string name="per_col">Buttons per column</string>
     <string name="aquarium">Aquarium mode</string>
     <string name="aquarium_help">Buttons sway in the water, each at its own pace. The shuffle button rearranges them, and extra buttons are paged with the arrows. Which entries appear is set in each entry.</string>
-    <string name="lang_help">Automatic uses Russian if your phone is set to Russian, otherwise English.</string>
+    <string name="lang_help">Automatic follows your phone language if it is supported, otherwise English.</string>
     <string name="lang_auto">Automatic</string>
-    <string name="lang_ru">Русский</string>
-    <string name="lang_en">English</string>
     <string name="backup_help">Copies your settings to the clipboard as text. Keep it in a note to restore after reinstalling.</string>
     <string name="copy">Copy</string>
     <string name="paste">Paste</string>
@@ -98,7 +96,7 @@
     <string name="entry_name_hint">For example: Personal, Work</string>
     <string name="how_open">How to open</string>
     <string name="mode_app">App</string>
-    <string name="mode_web">Website in browser</string>
+    <string name="mode_web">Site</string>
     <string name="app_found">Found: %1$s</string>
     <string name="app_missing">App not found. Pick it manually, or tapping will offer to install it or open the website.</string>
     <string name="pick_app">Choose another app</string>
@@ -117,7 +115,7 @@
     <string name="sum_app">App: %1$s</string>
     <string name="sum_app_missing">not found, will offer install or website</string>
     <string name="sum_web">Site · %1$s</string>
-    <string name="sum_hidden"> · hidden in widgets</string>
+    <string name="sum_hidden">· hidden in widgets</string>
     <string name="chooser_title">%1$s is not installed</string>
     <string name="chooser_msg">Install it from Google Play or open the official website?</string>
     <string name="chooser_play">Google Play</string>
@@ -125,4 +123,26 @@
     <string name="play_unavailable">Could not open Google Play</string>
     <string name="rows_hint">Auto picks the number of rows from the widget height. The widget can be stretched up to 6×4 cells.</string>
     <string name="cols_hint">Auto picks one or two columns from the widget width.</string>
+    <string name="recheck">Recheck apps</string>
+    <string name="recheck_done">Rechecked. AI apps found: %1$d</string>
+    <string name="recheck_hint">Press after installing an app. The check also runs every time you open AI Start, and buttons in widgets check again at the moment you tap them.</string>
+    <string name="theme_title">Theme</string>
+    <string name="theme_auto">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_help">Applies to the app and the widgets. System follows the dark mode of your phone.</string>
+    <string name="mode_pwa">Web app</string>
+    <string name="pwa_help">A web app is a website installed as an app. Open the site in Chrome, choose Install app or Add to Home screen, then pick the new app here.</string>
+    <string name="pwa_open_site">Open the site to install</string>
+    <string name="pwa_chosen">Web app: %1$s</string>
+    <string name="pwa_none">No web app chosen yet</string>
+    <string name="pwa_pick">Choose installed web app</string>
+    <string name="pwa_pick_title">Web apps</string>
+    <string name="pwa_pick_all">Show all apps…</string>
+    <string name="chooser_pwa_title">%1$s web app is not set up</string>
+    <string name="chooser_pwa_msg">Open the website, then use the browser menu: Install app or Add to Home screen. After that choose the new app in this entry.</string>
+    <string name="chooser_open_site">Open the site</string>
+    <string name="sum_pwa">Web app: %1$s</string>
+    <string name="sum_pwa_none">not chosen yet</string>
+    <string name="pick_auto">Automatic</string>
 </resources>

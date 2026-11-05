@@ -44,6 +44,10 @@ object Widgets {
 
     private fun settingsIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
 
+    /** Пакет, значок которого показываем на кнопке: выбранное приложение или веб-приложение входа. */
+    private fun iconPkg(context: Context, e: EntryCfg): String? =
+        if (e.pkg.isNotEmpty() && Apps.isInstalled(context, e.pkg)) e.pkg else null
+
     // ------------------------------------------------------------------
     // Общее для «Строк» и «Столбцов»
     // ------------------------------------------------------------------
@@ -94,6 +98,11 @@ object Widgets {
         val lc = L.wrap(context)
         val cfg = ConfigStore.load(context)
         val views = RemoteViews(context.packageName, R.layout.widget_groups)
+        val sk = Skin.forced(context)
+        if (sk != null) {
+            views.setInt(R.id.root_groups, "setBackgroundResource", sk.cardRes)
+            views.setTextColor(R.id.empty_groups, sk.sub)
+        }
         val shown = cfg.services.filter { it.enabled && cfg.entriesFor(it.id).isNotEmpty() }.take(4)
 
         views.setViewVisibility(R.id.empty_groups, if (shown.isEmpty()) View.VISIBLE else View.GONE)
@@ -112,6 +121,10 @@ object Widgets {
             views.setViewVisibility(Ids.row[r], View.VISIBLE)
             views.setImageViewBitmap(Ids.tile[r], Tiles.render(context, svc, cfg, 126))
             views.setTextViewText(Ids.name[r], svc.title)
+            if (sk != null) {
+                views.setInt(Ids.row[r], "setBackgroundResource", sk.rowRes)
+                views.setTextColor(Ids.name[r], sk.text)
+            }
             views.setOnClickPendingIntent(
                 Ids.tile[r],
                 pending(context, 100 + r * 10 + 9, Open.intentFor(context, svc, entries[0]))
@@ -126,6 +139,11 @@ object Widgets {
                 val e = entries[c]
                 val label = Labels.of(lc, e)
                 views.setViewVisibility(chip, View.VISIBLE)
+                if (sk != null) {
+                    views.setInt(chip, "setBackgroundResource", sk.chipRes)
+                    views.setTextColor(Ids.chipText[r][c], sk.text)
+                    views.setInt(Ids.chipApp[r][c], "setColorFilter", sk.text)
+                }
                 if (e.mode == "app") {
                     views.setViewVisibility(Ids.chipApp[r][c], View.VISIBLE)
                     views.setViewVisibility(Ids.chipWeb[r][c], View.GONE)
@@ -186,6 +204,14 @@ object Widgets {
         val density = context.resources.displayMetrics.density
         val empty = all.isEmpty()
 
+        val sk = Skin.forced(context)
+        if (sk != null) {
+            views.setInt(R.id.root_rows, "setBackgroundResource", sk.thinRes)
+            views.setTextColor(R.id.empty_rows, sk.sub)
+            views.setInt(R.id.nav_prev, "setColorFilter", sk.sub)
+            views.setInt(R.id.nav_next, "setColorFilter", sk.sub)
+            if (aq) views.setInt(R.id.nav_shuffle, "setColorFilter", sk.sub)
+        }
         views.setViewVisibility(R.id.empty_rows, if (empty) View.VISIBLE else View.GONE)
         views.setTextViewText(R.id.empty_rows, lc.getString(R.string.empty_hint))
         if (empty) {
@@ -223,7 +249,7 @@ object Widgets {
                 val item = shown[idx]
                 val label = Labels.of(lc, item.entry)
                 val badge = if (item.multi) label.take(1).uppercase() else ""
-                val bmp = Tiles.render(context, item.svc, cfg, 140, badge, item.entry.color)
+                val bmp = Tiles.render(context, item.svc, cfg, 140, badge, item.entry.color, iconPkg(context, item.entry))
                 views.setViewVisibility(slotId, View.VISIBLE)
                 if (aq) {
                     views.setImageViewBitmap(Ids.fa[r][s], bmp)
@@ -285,6 +311,14 @@ object Widgets {
         val density = context.resources.displayMetrics.density
         val empty = all.isEmpty()
 
+        val sk = Skin.forced(context)
+        if (sk != null) {
+            views.setInt(R.id.root_cols, "setBackgroundResource", sk.thinRes)
+            views.setTextColor(R.id.vempty, sk.sub)
+            views.setInt(R.id.vnav_prev, "setColorFilter", sk.sub)
+            views.setInt(R.id.vnav_next, "setColorFilter", sk.sub)
+            if (aq) views.setInt(R.id.vnav_shuffle, "setColorFilter", sk.sub)
+        }
         views.setViewVisibility(R.id.vempty, if (empty) View.VISIBLE else View.GONE)
         views.setTextViewText(R.id.vempty, lc.getString(R.string.empty_hint))
         if (empty) {
@@ -322,7 +356,7 @@ object Widgets {
                 val item = shown[idx]
                 val label = Labels.of(lc, item.entry)
                 val badge = if (item.multi) label.take(1).uppercase() else ""
-                val bmp = Tiles.render(context, item.svc, cfg, 140, badge, item.entry.color)
+                val bmp = Tiles.render(context, item.svc, cfg, 140, badge, item.entry.color, iconPkg(context, item.entry))
                 views.setViewVisibility(slotId, View.VISIBLE)
                 if (aq) {
                     views.setImageViewBitmap(Ids.vfa[c][s], bmp)
