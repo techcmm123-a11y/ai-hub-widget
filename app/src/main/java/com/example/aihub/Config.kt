@@ -146,7 +146,7 @@ class Config(
                         def?.mono ?: x.optString("mono"),
                         def?.bg ?: x.optInt("bg"),
                         def?.fg ?: x.optInt("fg"),
-                        def?.url ?: x.optString("url"),
+                        def?.url ?: Urls.safe(x.optString("url")),
                         x.optBoolean("enabled"), custom, x.optString("pkg")
                     )
                 )
@@ -164,7 +164,7 @@ class Config(
                 var mode = x.optString("mode", "web")
                 val serviceId = x.getString("service")
                 val browser = x.optString("browser")
-                val url = x.optString("url")
+                val url = Urls.safe(x.optString("url"))
                 var color = x.optInt("color", COLOR_BLUE)
                 // Старые версии сохраняли подпись по умолчанию как текст: переводим в «пусто».
                 val wasDefaultSite = (label == "Сайт" || label == "Site") && mode == "web" &&

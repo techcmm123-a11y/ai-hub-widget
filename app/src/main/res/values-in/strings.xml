@@ -145,4 +145,8 @@
     <string name="sum_pwa">Aplikasi web: %1$s</string>
     <string name="sum_pwa_none">belum dipilih</string>
     <string name="pick_auto">Otomatis</string>
+    <string name="invalid_link">Tautan tidak valid. Hanya tautan https yang diizinkan.</string>
+    <string name="restore_links_title">Cadangan berisi tautan khusus</string>
+    <string name="restore_links_msg">Situs ini akan dibuka dari tombol Anda: %1$s. Pulihkan hanya jika Anda memercayai sumber cadangan ini.</string>
+    <string name="about_apps_note">AI Start melihat daftar aplikasi di ponsel hanya untuk menemukan aplikasi AI Anda. Daftar itu tidak pernah keluar dari ponsel.</string>
 </resources>

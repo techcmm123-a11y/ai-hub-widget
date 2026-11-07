@@ -145,4 +145,8 @@
     <string name="sum_pwa">Appli web : %1$s</string>
     <string name="sum_pwa_none">pas encore choisie</string>
     <string name="pick_auto">Automatique</string>
+    <string name="invalid_link">Lien non valide. Seuls les liens https sont autorisés.</string>
+    <string name="restore_links_title">La sauvegarde contient des liens personnalisés</string>
+    <string name="restore_links_msg">Ces sites s’ouvriront depuis vos boutons : %1$s. Ne restaurez que si vous faites confiance à la source de cette sauvegarde.</string>
+    <string name="about_apps_note">AI Start consulte la liste des applis du téléphone uniquement pour trouver vos applis d’IA. La liste ne quitte jamais le téléphone.</string>
 </resources>

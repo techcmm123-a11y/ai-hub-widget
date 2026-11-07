@@ -145,4 +145,8 @@
     <string name="sum_pwa">웹 앱: %1$s</string>
     <string name="sum_pwa_none">아직 선택 안 함</string>
     <string name="pick_auto">자동</string>
+    <string name="invalid_link">잘못된 링크입니다. https 링크만 허용됩니다.</string>
+    <string name="restore_links_title">백업에 사용자 지정 링크가 있습니다</string>
+    <string name="restore_links_msg">이 사이트들이 버튼에서 열립니다: %1$s. 이 백업의 출처를 신뢰할 때만 복원하세요.</string>
+    <string name="about_apps_note">AI Start는 AI 앱을 찾기 위해서만 휴대전화의 앱 목록을 확인합니다. 목록은 휴대전화 밖으로 나가지 않습니다.</string>
 </resources>

@@ -1,4 +1,4 @@
-# AI Start 1.5
+# AI Start 1.6
 
 Quick access to your AI apps and accounts from the Android home screen.
 Быстрый доступ к ИИ-приложениям и аккаунтам с главного экрана Android.
@@ -29,3 +29,10 @@ the installed app in place. Use it for personal installs only.
 1. Upload the project files to a GitHub repository (branch main), including `.github/workflows/build.yml`.
 2. Actions, Build APK, wait for the green check.
 3. Download `ai-hub-apk` from Artifacts, unzip and install `app-debug.apk`.
+
+## Security and privacy
+- No permissions, no internet access, no third-party libraries, no analytics.
+- Links are limited to https; restoring a backup shows the sites it contains and asks to confirm.
+- See [SECURITY_AUDIT.md](SECURITY_AUDIT.md), [SECURITY.md](SECURITY.md) and [PRIVACY.md](PRIVACY.md).
+- The included debug key is public: use it only for personal installs. Distribute release builds signed with your own key.
+- Not affiliated with the companies whose AI services are linked.

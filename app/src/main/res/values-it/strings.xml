@@ -145,4 +145,8 @@
     <string name="sum_pwa">App web: %1$s</string>
     <string name="sum_pwa_none">non ancora scelta</string>
     <string name="pick_auto">Automatica</string>
+    <string name="invalid_link">Link non valido. Sono consentiti solo link https.</string>
+    <string name="restore_links_title">Il backup contiene link personalizzati</string>
+    <string name="restore_links_msg">Questi siti si apriranno dai tuoi pulsanti: %1$s. Ripristina solo se ti fidi della fonte di questo backup.</string>
+    <string name="about_apps_note">AI Start legge l’elenco delle app del telefono solo per trovare le tue app di IA. L’elenco non lascia mai il telefono.</string>
 </resources>

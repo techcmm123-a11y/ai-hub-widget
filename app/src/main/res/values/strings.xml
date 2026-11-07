@@ -145,4 +145,8 @@
     <string name="sum_pwa">Web app: %1$s</string>
     <string name="sum_pwa_none">not chosen yet</string>
     <string name="pick_auto">Automatic</string>
+    <string name="invalid_link">Invalid link. Only https links are allowed.</string>
+    <string name="restore_links_title">Backup contains custom links</string>
+    <string name="restore_links_msg">These sites will open from your buttons: %1$s. Restore only if you trust the source of this backup.</string>
+    <string name="about_apps_note">AI Start looks at the list of apps on your phone only to find your AI apps. The list never leaves your phone.</string>
 </resources>

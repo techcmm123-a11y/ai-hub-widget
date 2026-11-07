@@ -145,4 +145,8 @@
     <string name="sum_pwa">تطبيق الويب: %1$s</string>
     <string name="sum_pwa_none">لم يُختر بعد</string>
     <string name="pick_auto">تلقائي</string>
+    <string name="invalid_link">رابط غير صالح. يُسمح فقط بروابط https.</string>
+    <string name="restore_links_title">تحتوي النسخة الاحتياطية على روابط مخصصة</string>
+    <string name="restore_links_msg">ستُفتح هذه المواقع من أزرارك: %1$s. لا تستعد إلا إذا كنت تثق بمصدر هذه النسخة.</string>
+    <string name="about_apps_note">يطّلع AI Start على قائمة التطبيقات في هاتفك فقط للعثور على تطبيقات الذكاء الاصطناعي لديك. لا تغادر القائمة هاتفك أبدًا.</string>
 </resources>

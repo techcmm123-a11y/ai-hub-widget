@@ -145,4 +145,8 @@
     <string name="sum_pwa">वेब ऐप: %1$s</string>
     <string name="sum_pwa_none">अभी चुना नहीं गया</string>
     <string name="pick_auto">अपने-आप</string>
+    <string name="invalid_link">अमान्य लिंक। केवल https लिंक की अनुमति है।</string>
+    <string name="restore_links_title">बैकअप में अपने लिंक हैं</string>
+    <string name="restore_links_msg">ये साइटें आपके बटनों से खुलेंगी: %1$s। रीस्टोर तभी करें जब आप इस बैकअप के स्रोत पर भरोसा करते हों।</string>
+    <string name="about_apps_note">AI Start फ़ोन के ऐप की सूची केवल आपके AI ऐप खोजने के लिए देखता है। यह सूची कभी फ़ोन से बाहर नहीं जाती।</string>
 </resources>

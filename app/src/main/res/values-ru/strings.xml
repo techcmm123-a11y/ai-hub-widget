@@ -145,4 +145,8 @@
     <string name="sum_pwa">Веб-приложение: %1$s</string>
     <string name="sum_pwa_none">ещё не выбрано</string>
     <string name="pick_auto">Автоматически</string>
+    <string name="invalid_link">Некорректная ссылка. Разрешены только ссылки https.</string>
+    <string name="restore_links_title">В копии есть собственные ссылки</string>
+    <string name="restore_links_msg">Эти сайты будут открываться по вашим кнопкам: %1$s. Восстанавливайте только если доверяете источнику копии.</string>
+    <string name="about_apps_note">AI Start просматривает список приложений на телефоне только чтобы найти ваши ИИ-приложения. Список никуда не передаётся.</string>
 </resources>

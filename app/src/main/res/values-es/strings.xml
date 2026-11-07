@@ -145,4 +145,8 @@
     <string name="sum_pwa">App web: %1$s</string>
     <string name="sum_pwa_none">aún sin elegir</string>
     <string name="pick_auto">Automática</string>
+    <string name="invalid_link">Enlace no válido. Solo se permiten enlaces https.</string>
+    <string name="restore_links_title">La copia contiene enlaces propios</string>
+    <string name="restore_links_msg">Estos sitios se abrirán desde tus botones: %1$s. Restaura solo si confías en el origen de esta copia.</string>
+    <string name="about_apps_note">AI Start consulta la lista de apps de tu teléfono solo para encontrar tus apps de IA. La lista nunca sale del teléfono.</string>
 </resources>

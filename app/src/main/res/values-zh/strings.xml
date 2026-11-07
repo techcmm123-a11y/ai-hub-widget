@@ -145,4 +145,8 @@
     <string name="sum_pwa">网页应用：%1$s</string>
     <string name="sum_pwa_none">尚未选择</string>
     <string name="pick_auto">自动</string>
+    <string name="invalid_link">链接无效。只允许 https 链接。</string>
+    <string name="restore_links_title">备份中包含自定义链接</string>
+    <string name="restore_links_msg">这些网站将通过你的按钮打开：%1$s。只有信任此备份来源时才恢复。</string>
+    <string name="about_apps_note">AI Start 仅为查找你的 AI 应用而查看手机上的应用列表。该列表绝不会离开你的手机。</string>
 </resources>

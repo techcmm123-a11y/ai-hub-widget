@@ -145,4 +145,8 @@
     <string name="sum_pwa">Web-App: %1$s</string>
     <string name="sum_pwa_none">noch nicht gewählt</string>
     <string name="pick_auto">Automatisch</string>
+    <string name="invalid_link">Ungültiger Link. Nur https-Links sind erlaubt.</string>
+    <string name="restore_links_title">Die Sicherung enthält eigene Links</string>
+    <string name="restore_links_msg">Diese Websites werden über Ihre Schaltflächen geöffnet: %1$s. Stellen Sie nur wieder her, wenn Sie der Quelle dieser Sicherung vertrauen.</string>
+    <string name="about_apps_note">AI Start liest die App-Liste Ihres Telefons nur, um Ihre KI-Apps zu finden. Die Liste verlässt das Telefon nie.</string>
 </resources>

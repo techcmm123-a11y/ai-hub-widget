@@ -145,4 +145,8 @@
     <string name="sum_pwa">Aplikacja web: %1$s</string>
     <string name="sum_pwa_none">jeszcze nie wybrano</string>
     <string name="pick_auto">Automatycznie</string>
+    <string name="invalid_link">Nieprawidłowy link. Dozwolone są tylko linki https.</string>
+    <string name="restore_links_title">Kopia zawiera własne linki</string>
+    <string name="restore_links_msg">Te strony będą otwierane z Twoich przycisków: %1$s. Przywracaj tylko wtedy, gdy ufasz źródłu tej kopii.</string>
+    <string name="about_apps_note">AI Start przegląda listę aplikacji w telefonie tylko po to, by znaleźć Twoje aplikacje AI. Lista nigdy nie opuszcza telefonu.</string>
 </resources>

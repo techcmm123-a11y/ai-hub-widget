@@ -7,6 +7,7 @@ import android.content.ClipboardManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.view.Gravity
@@ -367,9 +368,11 @@ class MainActivity : Activity() {
             .setView(box)
             .setPositiveButton(R.string.add) { _, _ ->
                 val n = name.text.toString().trim()
-                var u = url.text.toString().trim()
-                if (n.isNotEmpty() && u.isNotEmpty()) {
-                    if (!u.startsWith("http")) u = "https://" + u
+                val rawUrl = url.text.toString().trim()
+                val u = Urls.safe(rawUrl)
+                if (n.isNotEmpty() && rawUrl.isNotEmpty() && u.isEmpty()) {
+                    Toast.makeText(this, R.string.invalid_link, Toast.LENGTH_LONG).show()
+                } else if (n.isNotEmpty() && u.isNotEmpty()) {
                     val id = "c_" + Config.newId()
                     val mono = n.take(2).replaceFirstChar { it.uppercase() }
                     cfg.services.add(
@@ -628,7 +631,14 @@ class MainActivity : Activity() {
         val copy = button(getString(R.string.copy), Ui.ROW, Ui.TEXT)
         copy.setOnClickListener {
             val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            cm.setPrimaryClip(ClipData.newPlainText(getString(R.string.app_name), cfg.toJson().toString()))
+            val clip = ClipData.newPlainText(getString(R.string.app_name), cfg.toJson().toString())
+            if (Build.VERSION.SDK_INT >= 33) {
+                // Просим систему не показывать содержимое в подсказке буфера обмена.
+                val extras = android.os.PersistableBundle()
+                extras.putBoolean("android.content.extra.IS_SENSITIVE", true)
+                clip.description.extras = extras
+            }
+            cm.setPrimaryClip(clip)
             Toast.makeText(this, R.string.copied, Toast.LENGTH_SHORT).show()
         }
         val paste = button(getString(R.string.paste), Ui.ROW, Ui.TEXT)
@@ -656,15 +666,47 @@ class MainActivity : Activity() {
             .setPositiveButton(R.string.restore) { _, _ ->
                 try {
                     val restored = Config.fromJson(JSONObject(field.text.toString().trim()))
-                    ConfigStore.save(this, restored)
-                    render()
-                    Toast.makeText(this, R.string.restored, Toast.LENGTH_SHORT).show()
+                    confirmRestore(restored)
                 } catch (ex: Exception) {
                     Toast.makeText(this, R.string.restore_failed, Toast.LENGTH_LONG).show()
                 }
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
+    }
+
+    /** Перед восстановлением показывает, какие собственные ссылки есть в копии: подмену ссылок не пропустить. */
+    private fun confirmRestore(restored: Config) {
+        val hosts = LinkedHashSet<String>()
+        for (s in restored.services) {
+            if (s.custom) {
+                val h = Urls.host(s.url)
+                if (h != null) hosts.add(h)
+            }
+        }
+        for (e in restored.entries) {
+            if (e.url.isNotEmpty()) {
+                val h = Urls.host(e.url)
+                if (h != null) hosts.add(h)
+            }
+        }
+        if (hosts.isEmpty()) {
+            applyRestore(restored)
+            return
+        }
+        val list = hosts.take(10).joinToString(", ") + (if (hosts.size > 10) "…" else "")
+        Ui.dialog(this)
+            .setTitle(R.string.restore_links_title)
+            .setMessage(getString(R.string.restore_links_msg, list))
+            .setPositiveButton(R.string.restore) { _, _ -> applyRestore(restored) }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    private fun applyRestore(restored: Config) {
+        ConfigStore.save(this, restored)
+        render()
+        Toast.makeText(this, R.string.restored, Toast.LENGTH_SHORT).show()
     }
 
     // ---------------------------------------------------------- «О приложении и поддержка»
@@ -682,6 +724,7 @@ class MainActivity : Activity() {
         about.addView(Ui.label(this, getString(R.string.about_version, version), 13f, Ui.SUB), lp(match, wrap, 2))
         about.addView(Ui.label(this, getString(R.string.about_text), 14f, Ui.TEXT), lp(match, wrap, 10))
         about.addView(Ui.label(this, getString(R.string.about_privacy), 13f, Ui.SUB), lp(match, wrap, 10))
+        about.addView(Ui.label(this, getString(R.string.about_apps_note), 13f, Ui.SUB), lp(match, wrap, 8))
         root.addView(about, lp(match, wrap, 10))
 
         val donate = cardBox()

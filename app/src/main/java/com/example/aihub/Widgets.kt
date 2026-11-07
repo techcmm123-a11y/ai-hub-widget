@@ -80,10 +80,28 @@ object Widgets {
         intent.action = action
         intent.data = Uri.parse("aihub://" + cls.simpleName + "/" + id + "/" + action)
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id)
+        intent.putExtra("tok", token(context))
         return PendingIntent.getBroadcast(
             context, 1000 + id * 4 + k, intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+    }
+
+    /** Секретная метка этой установки: команды листания принимаются только с ней, чужие приложения их не подделают. */
+    private fun token(context: Context): String {
+        val p = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val existing = p.getString("nav_token", null)
+        if (existing != null) return existing
+        val fresh = java.util.UUID.randomUUID().toString()
+        p.edit().putString("nav_token", fresh).apply()
+        return fresh
+    }
+
+    /** Истина, если команда листания или перемешивания пришла от самого виджета. */
+    fun isOwnNav(context: Context, intent: Intent): Boolean {
+        val a = intent.action
+        if (a != ACTION_PREV && a != ACTION_NEXT && a != ACTION_SHUFFLE) return false
+        return intent.getStringExtra("tok") == token(context)
     }
 
     fun shuffle(context: Context) {
@@ -410,6 +428,7 @@ class RowsWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
+        if (!Widgets.isOwnNav(context, intent)) return
         val id = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
         when (intent.action) {
             Widgets.ACTION_PREV -> if (id != AppWidgetManager.INVALID_APPWIDGET_ID) Widgets.turnRows(context, id, -1)
@@ -443,6 +462,7 @@ class ColumnsWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
+        if (!Widgets.isOwnNav(context, intent)) return
         val id = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
         when (intent.action) {
             Widgets.ACTION_PREV -> if (id != AppWidgetManager.INVALID_APPWIDGET_ID) Widgets.turnCols(context, id, -1)

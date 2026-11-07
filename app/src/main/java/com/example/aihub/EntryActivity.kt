@@ -325,18 +325,13 @@ class EntryActivity : Activity() {
             .show()
     }
 
-    private fun normalizeUrl(s: String): String {
-        if (s.isEmpty()) return ""
-        return if (s.startsWith("http")) s else "https://" + s
-    }
-
     private fun selectedBrowser(): String {
         val pos = browserSpinner.selectedItemPosition
         return if (pos > 0) browsers[pos - 1].pkg else ""
     }
 
     private fun openSiteToInstall() {
-        val url = normalizeUrl(urlField.text.toString().trim())
+        val url = Urls.safe(urlField.text.toString())
         try {
             startActivity(Browsers.siteIntent(this, if (url.isNotEmpty()) url else svc.url, selectedBrowser()))
         } catch (e: Exception) {
@@ -347,7 +342,11 @@ class EntryActivity : Activity() {
     private fun collect(): EntryCfg {
         val label = labelField.text.toString().trim()
         val browser = if (mode == "app") "" else selectedBrowser()
-        val url = if (mode == "app") "" else normalizeUrl(urlField.text.toString().trim())
+        val rawUrl = urlField.text.toString().trim()
+        val url = if (mode == "app") "" else Urls.safe(rawUrl)
+        if (mode != "app" && rawUrl.isNotEmpty() && url.isEmpty()) {
+            Toast.makeText(this, R.string.invalid_link, Toast.LENGTH_LONG).show()
+        }
         val pkg = if (mode == "web") "" else entryPkg
         return EntryCfg(
             entry?.id ?: Config.newId(), svc.id, label, mode, browser, url, color,

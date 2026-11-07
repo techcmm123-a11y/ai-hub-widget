@@ -145,4 +145,8 @@
     <string name="sum_pwa">Web uygulaması: %1$s</string>
     <string name="sum_pwa_none">henüz seçilmedi</string>
     <string name="pick_auto">Otomatik</string>
+    <string name="invalid_link">Geçersiz bağlantı. Yalnızca https bağlantılarına izin verilir.</string>
+    <string name="restore_links_title">Yedekte özel bağlantılar var</string>
+    <string name="restore_links_msg">Bu siteler düğmelerinizden açılacak: %1$s. Yalnızca bu yedeğin kaynağına güveniyorsanız geri yükleyin.</string>
+    <string name="about_apps_note">AI Start, telefondaki uygulama listesine yalnızca YZ uygulamalarınızı bulmak için bakar. Liste telefondan asla çıkmaz.</string>
 </resources>

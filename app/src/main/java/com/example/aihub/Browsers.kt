@@ -22,12 +22,15 @@ object Browsers {
 
     /** Открывает сайт в выбранном браузере, а если он не выбран или удалён, в браузере по умолчанию. */
     fun siteIntent(context: Context, url: String, browserPkg: String): Intent {
+        val safe = Urls.safe(url)
+        // Недопустимая ссылка (не https и т. п.) не открывается: вместо неё откроются настройки.
+        if (safe.isEmpty()) return Intent(context, MainActivity::class.java)
         if (browserPkg.isNotEmpty()) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).setPackage(browserPkg)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(safe)).setPackage(browserPkg)
             if (intent.resolveActivity(context.packageManager) != null) return intent
         }
         val fallback = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER)
-        fallback.data = Uri.parse(url)
+        fallback.data = Uri.parse(safe)
         return fallback
     }
 }

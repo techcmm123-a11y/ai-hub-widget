@@ -145,4 +145,8 @@
     <string name="sum_pwa">Ứng dụng web: %1$s</string>
     <string name="sum_pwa_none">chưa chọn</string>
     <string name="pick_auto">Tự động</string>
+    <string name="invalid_link">Liên kết không hợp lệ. Chỉ cho phép liên kết https.</string>
+    <string name="restore_links_title">Bản sao lưu chứa các liên kết tùy chỉnh</string>
+    <string name="restore_links_msg">Các trang này sẽ được mở từ các nút của bạn: %1$s. Chỉ khôi phục nếu bạn tin tưởng nguồn của bản sao lưu này.</string>
+    <string name="about_apps_note">AI Start chỉ xem danh sách ứng dụng trên điện thoại để tìm các ứng dụng AI của bạn. Danh sách không bao giờ rời khỏi điện thoại.</string>
 </resources>

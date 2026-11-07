@@ -145,4 +145,8 @@
     <string name="sum_pwa">ウェブアプリ：%1$s</string>
     <string name="sum_pwa_none">未選択</string>
     <string name="pick_auto">自動</string>
+    <string name="invalid_link">無効なリンクです。https リンクのみ使用できます。</string>
+    <string name="restore_links_title">バックアップに独自のリンクが含まれています</string>
+    <string name="restore_links_msg">これらのサイトがボタンから開かれます：%1$s。このバックアップの提供元を信頼できる場合のみ復元してください。</string>
+    <string name="about_apps_note">AI Start は、AIアプリを見つけるためだけに端末のアプリ一覧を参照します。一覧が端末の外に出ることはありません。</string>
 </resources>
